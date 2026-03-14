@@ -197,3 +197,4 @@ libyang/
 *.tar
 *.tgz
 *.tar.gz
+src/device/service/drivers/openconfig/templates/VPN/openconfig_network_instance.py
