@@ -25,6 +25,7 @@ from common.Constants import DEFAULT_CONTEXT_NAME
 from context.client.ContextClient import ContextClient
 from slice.client.SliceClient import SliceClient
 
+
 slice = Blueprint('slice', __name__, url_prefix='/slice')
 
 context_client = ContextClient()
@@ -90,6 +91,8 @@ def get_slice_endpoints(slice_obj: Slice) -> list[EndPointId]:
     otherwise return the slice's list of endpoint ids.
     '''
     try:
+        if len(slice_obj.slice_endpoint_ids) == 0:
+            return []
         first_slice_endpoint_id = slice_obj.slice_endpoint_ids[0]
         topology_uuid = first_slice_endpoint_id.topology_id.topology_uuid.uuid
         context_uuid = slice_obj.slice_id.context_id.context_uuid.uuid
@@ -112,7 +115,7 @@ def get_slice_endpoints(slice_obj: Slice) -> list[EndPointId]:
         del slice_obj.slice_endpoint_ids[:]
         slice_obj.slice_endpoint_ids.extend(list_endpoint_ids)
 
-    except ConfigRuleNotFoundError:
+    except (ConfigRuleNotFoundError, IndexError):
         # The slice does not have `running_ietf_slice` config rule, return slice's list of endpoint ids
         list_endpoint_ids = slice_obj.slice_endpoint_ids
 
@@ -133,8 +136,8 @@ def home():
         device_names, endpoints_data = list(), list()
     else:
         try:
-            slices = context_client.ListSlices(context_obj.context_id)
-            slices = slices.slices
+            slices_list = context_client.ListSlices(context_obj.context_id)
+            slices = slices_list.slices
         except grpc.RpcError as e:
             if e.code() != grpc.StatusCode.NOT_FOUND: raise
             if e.details() != 'Context({:s}) not found'.format(context_uuid): raise

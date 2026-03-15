@@ -17,68 +17,68 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h2>ETSI TeraFlowSDN Controller</h2>
+<h2>xG-AI Cognitive Controller</h2>
 
-    {% for field, message in context_topology_form.errors.items() %}
-        <div class="alert alert-dismissible fade show" role="alert">
-        <b>{{ field }}</b>: {{ message }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+{% for field, message in context_topology_form.errors.items() %}
+<div class="alert alert-dismissible fade show" role="alert">
+    <b>{{ field }}</b>: {{ message }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+{% endfor %}
+
+<form id="select_context" method="POST" enctype="multipart/form-data">
+    {{ context_topology_form.hidden_tag() }}
+    <fieldset class="form-group">
+        <legend>Select the desired Context/Topology</legend>
+        <div class="row mb-3">
+            {{ context_topology_form.context_topology.label(class="col-sm-1 col-form-label") }}
+            <div class="col-sm-5">
+                {% if context_topology_form.context_topology.errors %}
+                {{ context_topology_form.context_topology(class="form-select is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in context_topology_form.context_topology.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ context_topology_form.context_topology(class="form-select") }}
+                {% endif %}
+            </div>
+            <div class="col-sm-2">
+                {{ context_topology_form.submit(class='btn btn-primary') }}
+            </div>
         </div>
+    </fieldset>
+</form>
 
-    {% endfor %}
-
-    <form id="select_context" method="POST" enctype="multipart/form-data">
-        {{ context_topology_form.hidden_tag() }}
-        <fieldset class="form-group">
-            <legend>Select the desired Context/Topology</legend>
-            <div class="row mb-3">
-                {{ context_topology_form.context_topology.label(class="col-sm-1 col-form-label") }}
-                <div class="col-sm-5">
-                    {% if context_topology_form.context_topology.errors %}
-                        {{ context_topology_form.context_topology(class="form-select is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in context_topology_form.context_topology.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ context_topology_form.context_topology(class="form-select") }}
-                    {% endif %}
+<form id="upload_descriptors" method="POST" enctype="multipart/form-data">
+    {{ descriptor_form.hidden_tag() }}
+    <fieldset class="form-group">
+        <legend>Upload a JSON descriptors file</legend>
+        <div class="row mb-3">
+            {{ descriptor_form.descriptors.label(class="col-sm-1 col-form-label") }}
+            <div class="col-sm-5">
+                {% if descriptor_form.descriptors.errors %}
+                {{ descriptor_form.descriptors(class="form-control is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in descriptor_form.descriptors.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
                 </div>
-                <div class="col-sm-2">
-                    {{ context_topology_form.submit(class='btn btn-primary') }}
-                </div>
+                {% else %}
+                {{ descriptor_form.descriptors(class="form-control") }}
+                {% endif %}
             </div>
-        </fieldset>
-    </form>
-
-    <form id="upload_descriptors" method="POST" enctype="multipart/form-data">
-        {{ descriptor_form.hidden_tag() }}
-        <fieldset class="form-group">
-            <legend>Upload a JSON descriptors file</legend>
-            <div class="row mb-3">
-                {{ descriptor_form.descriptors.label(class="col-sm-1 col-form-label") }}
-                <div class="col-sm-5">
-                    {% if descriptor_form.descriptors.errors %}
-                        {{ descriptor_form.descriptors(class="form-control is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in descriptor_form.descriptors.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ descriptor_form.descriptors(class="form-control") }}
-                    {% endif %}
-                </div>
-                <div class="col-sm-2">
-                    {{ descriptor_form.submit(class='btn btn-primary') }}
-                </div>
+            <div class="col-sm-2">
+                {{ descriptor_form.submit(class='btn btn-primary') }}
             </div>
-        </fieldset>
-    </form>
+        </div>
+    </fieldset>
+</form>
 
-    <script src="https://d3js.org/d3.v4.min.js"></script>
-    <div id="topology"></div>
-    <script src="{{ url_for('js.topology_js') }}"></script>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<div id="topology"></div>
+<script src="{{ url_for('js.topology_js') }}"></script>
 
 {% endblock %}

@@ -37,7 +37,7 @@ spec:
             - name: LOG_LEVEL
               value: "INFO"
             - name: BATCH_SIZE
-              value: "256"
+              value: "10"
             - name: CAD_CLASSIFICATION_THRESHOLD
               value: "0.5"
             - name: MONITORED_KPIS_TIME_INTERVAL_AGG
@@ -55,16 +55,20 @@ spec:
           readinessProbe:
             exec:
               command: ["/bin/grpc_health_probe", "-addr=:10001"]
+            initialDelaySeconds: 10
+            timeoutSeconds: 5
           livenessProbe:
             exec:
               command: ["/bin/grpc_health_probe", "-addr=:10001"]
+            initialDelaySeconds: 10
+            timeoutSeconds: 5
           resources:
             requests:
-              cpu: 50m
-              memory: 256Mi
+              cpu: 25m
+              memory: 128Mi
             limits:
-              cpu: 300m
-              memory: 1024Mi
+              cpu: 100m
+              memory: 512Mi
 ---
 apiVersion: v1
 kind: Service

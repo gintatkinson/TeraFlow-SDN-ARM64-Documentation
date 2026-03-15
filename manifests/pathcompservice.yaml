@@ -47,11 +47,11 @@ spec:
               command: ["/bin/grpc_health_probe", "-addr=:10020"]
           resources:
             requests:
-              cpu: 250m
+              cpu: 50m
               memory: 128Mi
             limits:
-              cpu: 1000m
-              memory: 1024Mi
+              cpu: 500m
+              memory: 1Gi
         - name: backend
           image: labs.etsi.org:5050/tfs/controller/pathcomp-backend:latest
           imagePullPolicy: Always
@@ -71,11 +71,11 @@ spec:
           #  timeoutSeconds: 5
           resources:
             requests:
-              cpu: 250m
-              memory: 256Mi
+              cpu: 50m
+              memory: 128Mi
             limits:
-              cpu: 1000m
-              memory: 1024Mi
+              cpu: 500m
+              memory: 1Gi
 ---
 apiVersion: v1
 kind: Service

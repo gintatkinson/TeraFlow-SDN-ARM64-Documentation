@@ -29,7 +29,7 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
         - name: server
-          image: labs.etsi.org:5050/tfs/controller/forecaster:latest
+          image: localhost:32000/tfs/forecaster:dev10
           imagePullPolicy: Always
           ports:
             - containerPort: 10040
@@ -47,16 +47,20 @@ spec:
           readinessProbe:
             exec:
               command: ["/bin/grpc_health_probe", "-addr=:10040"]
+            initialDelaySeconds: 10
+            timeoutSeconds: 5
           livenessProbe:
             exec:
               command: ["/bin/grpc_health_probe", "-addr=:10040"]
+            initialDelaySeconds: 10
+            timeoutSeconds: 5
           resources:
             requests:
-              cpu: 250m
-              memory: 128Mi
+              cpu: 50m
+              memory: 64Mi
             limits:
-              cpu: 1000m
-              memory: 1024Mi
+              cpu: 500m
+              memory: 512Mi
 ---
 apiVersion: v1
 kind: Service

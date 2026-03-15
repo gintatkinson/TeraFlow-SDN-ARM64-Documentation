@@ -60,11 +60,11 @@ VALUES_FILE_MIMIR="$VALUES_FILE_PATH/mimir_values.yaml"
 # -----------------------------------------------------------
 # Grafana Configuration
 # -----------------------------------------------------------
-# RELEASE_NAME_GRAFANA="mon-grafana"
-# CHART_REPO_NAME_GRAFANA="grafana"
-# CHART_REPO_URL_GRAFANA="https://grafana.github.io/helm-charts"
-# CHART_NAME_GRAFANA="grafana"
-# VALUES_FILE_GRAFANA="$VALUES_FILE_PATH/grafana_values.yaml"
+RELEASE_NAME_GRAFANA="mon-grafana"
+CHART_REPO_NAME_GRAFANA="grafana"
+CHART_REPO_URL_GRAFANA="https://grafana.github.io/helm-charts"
+CHART_NAME_GRAFANA="grafana"
+VALUES_FILE_GRAFANA="$VALUES_FILE_PATH/grafana_values.yaml"
 
 
 # -----------------------------------------------------------
@@ -139,14 +139,14 @@ fi
 
 
 # 3) Deploy Grafana
-# deploy_chart "$RELEASE_NAME_GRAFANA" \
-#              "$CHART_REPO_NAME_GRAFANA" \
-#              "$CHART_REPO_URL_GRAFANA" \
-#              "$CHART_NAME_GRAFANA" \
-#              "$VALUES_FILE_GRAFANA" \
-#              "$NAMESPACE"
+deploy_chart "$RELEASE_NAME_GRAFANA" \
+             "$CHART_REPO_NAME_GRAFANA" \
+             "$CHART_REPO_URL_GRAFANA" \
+             "$CHART_NAME_GRAFANA" \
+             "$VALUES_FILE_GRAFANA" \
+             "$NAMESPACE"
 
-# kubectl rollout status deployment/"$RELEASE_NAME_GRAFANA" -n "$NAMESPACE" || true
+kubectl rollout status deployment/"$RELEASE_NAME_GRAFANA" -n "$NAMESPACE" || true
 
 # -----------------------------------------------------------
 echo "All deployments completed!"
