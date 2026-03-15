@@ -1,0 +1,63 @@
+# xG-AI Cloud Deployment - Context Service
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: contextservice
+spec:
+  selector:
+    matchLabels:
+      app: contextservice
+  template:
+    metadata:
+      labels:
+        app: contextservice
+    spec:
+      terminationGracePeriodSeconds: 5
+      containers:
+        - name: server
+          image: us-central1-docker.pkg.dev/xg-ai-controller-77/xg-ai-images/contextservice:v1
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 1010
+            - containerPort: 9192
+          env:
+            - name: LOG_LEVEL
+              value: "INFO"
+            - name: ALLOW_EXPLICIT_ADD_DEVICE_TO_TOPOLOGY
+              value: "FALSE"
+            - name: ALLOW_EXPLICIT_ADD_LINK_TO_TOPOLOGY
+              value: "FALSE"
+          # GKE Autopilot handles probes automatically, but we keep them for logic
+          readinessProbe:
+            grpc:
+              port: 1010
+          livenessProbe:
+            grpc:
+              port: 1010
+          resources:
+            requests:
+              cpu: 250m
+              memory: 128Mi
+            limits:
+              cpu: 1000m
+              memory: 1024Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: contextservice
+  labels:
+    app: contextservice
+spec:
+  type: ClusterIP
+  selector:
+    app: contextservice
+  ports:
+    - name: grpc
+      protocol: TCP
+      port: 1010
+      targetPort: 1010
+    - name: metrics
+      protocol: TCP
+      port: 9192
+      targetPort: 9192
