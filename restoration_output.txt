@@ -1,0 +1,437 @@
+Starting high-speed Context-Direct topology restoration to GKE...
+Targeting Context: 43813baf-195e-5da6-af20-b3d0922e71a7, Topology: c76135e3-24a8-5e92-9bed-c3c9139359c8
+Injecting devices...
+Injecting links...
+Error link DC1/eth1==R149/eth-1/0/22: <_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.INTERNAL
+	details = "(psycopg2.errors.ForeignKeyViolation) insert on table "link_endpoint" violates foreign key constraint "link_endpoint_endpoint_uuid_fkey"
+DETAIL:  Key (endpoint_uuid)=('55e88b6b-ccf7-538f-a062-a41219292ea1') is not present in table "endpoint".
+
+[SQL: INSERT INTO link_endpoint (link_uuid, endpoint_uuid, position) VALUES (%(link_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(link_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (link_uuid, endpoint_uuid) DO NOTHING]
+[parameters: {'link_uuid_m0': UUID('7817e1b2-3e2c-5bcf-93d0-c615a3197d6b'), 'endpoint_uuid_m0': UUID('55e88b6b-ccf7-538f-a062-a41219292ea1'), 'position_m0': 0, 'link_uuid_m1': UUID('7817e1b2-3e2c-5bcf-93d0-c615a3197d6b'), 'endpoint_uuid_m1': UUID('f1e57176-aaca-594a-b0ff-c0fc609554b6'), 'position_m1': 1}]
+(Background on this error at: https://sqlalche.me/e/14/gkpj)"
+	debug_error_string = "UNKNOWN:Error received from peer  {grpc_status:13, grpc_message:"(psycopg2.errors.ForeignKeyViolation) insert on table \"link_endpoint\" violates foreign key constraint \"link_endpoint_endpoint_uuid_fkey\"\nDETAIL:  Key (endpoint_uuid)=(\'55e88b6b-ccf7-538f-a062-a41219292ea1\') is not present in table \"endpoint\".\n\n[SQL: INSERT INTO link_endpoint (link_uuid, endpoint_uuid, position) VALUES (%(link_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(link_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (link_uuid, endpoint_uuid) DO NOTHING]\n[parameters: {\'link_uuid_m0\': UUID(\'7817e1b2-3e2c-5bcf-93d0-c615a3197d6b\'), \'endpoint_uuid_m0\': UUID(\'55e88b6b-ccf7-538f-a062-a41219292ea1\'), \'position_m0\': 0, \'link_uuid_m1\': UUID(\'7817e1b2-3e2c-5bcf-93d0-c615a3197d6b\'), \'endpoint_uuid_m1\': UUID(\'f1e57176-aaca-594a-b0ff-c0fc609554b6\'), \'position_m1\': 1}]\n(Background on this error at: https://sqlalche.me/e/14/gkpj)"}"
+>
+Error link R149/eth-1/0/22==DC1/eth1: <_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.INTERNAL
+	details = "(psycopg2.errors.ForeignKeyViolation) insert on table "link_endpoint" violates foreign key constraint "link_endpoint_endpoint_uuid_fkey"
+DETAIL:  Key (endpoint_uuid)=('f1e57176-aaca-594a-b0ff-c0fc609554b6') is not present in table "endpoint".
+
+[SQL: INSERT INTO link_endpoint (link_uuid, endpoint_uuid, position) VALUES (%(link_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(link_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (link_uuid, endpoint_uuid) DO NOTHING]
+[parameters: {'link_uuid_m0': UUID('8d91b5e4-b718-5e04-8049-11d09b2834dc'), 'endpoint_uuid_m0': UUID('f1e57176-aaca-594a-b0ff-c0fc609554b6'), 'position_m0': 0, 'link_uuid_m1': UUID('8d91b5e4-b718-5e04-8049-11d09b2834dc'), 'endpoint_uuid_m1': UUID('55e88b6b-ccf7-538f-a062-a41219292ea1'), 'position_m1': 1}]
+(Background on this error at: https://sqlalche.me/e/14/gkpj)"
+	debug_error_string = "UNKNOWN:Error received from peer  {grpc_status:13, grpc_message:"(psycopg2.errors.ForeignKeyViolation) insert on table \"link_endpoint\" violates foreign key constraint \"link_endpoint_endpoint_uuid_fkey\"\nDETAIL:  Key (endpoint_uuid)=(\'f1e57176-aaca-594a-b0ff-c0fc609554b6\') is not present in table \"endpoint\".\n\n[SQL: INSERT INTO link_endpoint (link_uuid, endpoint_uuid, position) VALUES (%(link_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(link_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (link_uuid, endpoint_uuid) DO NOTHING]\n[parameters: {\'link_uuid_m0\': UUID(\'8d91b5e4-b718-5e04-8049-11d09b2834dc\'), \'endpoint_uuid_m0\': UUID(\'f1e57176-aaca-594a-b0ff-c0fc609554b6\'), \'position_m0\': 0, \'link_uuid_m1\': UUID(\'8d91b5e4-b718-5e04-8049-11d09b2834dc\'), \'endpoint_uuid_m1\': UUID(\'55e88b6b-ccf7-538f-a062-a41219292ea1\'), \'position_m1\': 1}]\n(Background on this error at: https://sqlalche.me/e/14/gkpj)"}"
+>
+Error link R149/eth-1/0/9==MW/192.168.27.140:5: <_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.INTERNAL
+	details = "(psycopg2.errors.ForeignKeyViolation) insert on table "link_endpoint" violates foreign key constraint "link_endpoint_endpoint_uuid_fkey"
+DETAIL:  Key (endpoint_uuid)=('be264f6e-2526-5396-8816-7ef83ac0283f') is not present in table "endpoint".
+
+[SQL: INSERT INTO link_endpoint (link_uuid, endpoint_uuid, position) VALUES (%(link_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(link_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (link_uuid, endpoint_uuid) DO NOTHING]
+[parameters: {'link_uuid_m0': UUID('1a229a40-d80e-5cc3-b502-310c4596e93c'), 'endpoint_uuid_m0': UUID('be264f6e-2526-5396-8816-7ef83ac0283f'), 'position_m0': 0, 'link_uuid_m1': UUID('1a229a40-d80e-5cc3-b502-310c4596e93c'), 'endpoint_uuid_m1': UUID('8cedb566-1a78-56ed-9a58-9d0e0c3c92be'), 'position_m1': 1}]
+(Background on this error at: https://sqlalche.me/e/14/gkpj)"
+	debug_error_string = "UNKNOWN:Error received from peer  {grpc_status:13, grpc_message:"(psycopg2.errors.ForeignKeyViolation) insert on table \"link_endpoint\" violates foreign key constraint \"link_endpoint_endpoint_uuid_fkey\"\nDETAIL:  Key (endpoint_uuid)=(\'be264f6e-2526-5396-8816-7ef83ac0283f\') is not present in table \"endpoint\".\n\n[SQL: INSERT INTO link_endpoint (link_uuid, endpoint_uuid, position) VALUES (%(link_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(link_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (link_uuid, endpoint_uuid) DO NOTHING]\n[parameters: {\'link_uuid_m0\': UUID(\'1a229a40-d80e-5cc3-b502-310c4596e93c\'), \'endpoint_uuid_m0\': UUID(\'be264f6e-2526-5396-8816-7ef83ac0283f\'), \'position_m0\': 0, \'link_uuid_m1\': UUID(\'1a229a40-d80e-5cc3-b502-310c4596e93c\'), \'endpoint_uuid_m1\': UUID(\'8cedb566-1a78-56ed-9a58-9d0e0c3c92be\'), \'position_m1\': 1}]\n(Background on this error at: https://sqlalche.me/e/14/gkpj)"}"
+>
+Error link MW/192.168.27.140:5==R149/eth-1/0/9: <_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.INTERNAL
+	details = "(psycopg2.errors.ForeignKeyViolation) insert on table "link_endpoint" violates foreign key constraint "link_endpoint_endpoint_uuid_fkey"
+DETAIL:  Key (endpoint_uuid)=('8cedb566-1a78-56ed-9a58-9d0e0c3c92be') is not present in table "endpoint".
+
+[SQL: INSERT INTO link_endpoint (link_uuid, endpoint_uuid, position) VALUES (%(link_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(link_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (link_uuid, endpoint_uuid) DO NOTHING]
+[parameters: {'link_uuid_m0': UUID('9de539d9-c6e6-5553-a38b-3e1fceca95e6'), 'endpoint_uuid_m0': UUID('8cedb566-1a78-56ed-9a58-9d0e0c3c92be'), 'position_m0': 0, 'link_uuid_m1': UUID('9de539d9-c6e6-5553-a38b-3e1fceca95e6'), 'endpoint_uuid_m1': UUID('be264f6e-2526-5396-8816-7ef83ac0283f'), 'position_m1': 1}]
+(Background on this error at: https://sqlalche.me/e/14/gkpj)"
+	debug_error_string = "UNKNOWN:Error received from peer  {grpc_status:13, grpc_message:"(psycopg2.errors.ForeignKeyViolation) insert on table \"link_endpoint\" violates foreign key constraint \"link_endpoint_endpoint_uuid_fkey\"\nDETAIL:  Key (endpoint_uuid)=(\'8cedb566-1a78-56ed-9a58-9d0e0c3c92be\') is not present in table \"endpoint\".\n\n[SQL: INSERT INTO link_endpoint (link_uuid, endpoint_uuid, position) VALUES (%(link_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(link_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (link_uuid, endpoint_uuid) DO NOTHING]\n[parameters: {\'link_uuid_m0\': UUID(\'9de539d9-c6e6-5553-a38b-3e1fceca95e6\'), \'endpoint_uuid_m0\': UUID(\'8cedb566-1a78-56ed-9a58-9d0e0c3c92be\'), \'position_m0\': 0, \'link_uuid_m1\': UUID(\'9de539d9-c6e6-5553-a38b-3e1fceca95e6\'), \'endpoint_uuid_m1\': UUID(\'be264f6e-2526-5396-8816-7ef83ac0283f\'), \'position_m1\': 1}]\n(Background on this error at: https://sqlalche.me/e/14/gkpj)"}"
+>
+Error link MW/192.168.27.139:5==OFC HUB 1/1/1: <_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.INTERNAL
+	details = "(psycopg2.errors.ForeignKeyViolation) insert on table "link_endpoint" violates foreign key constraint "link_endpoint_endpoint_uuid_fkey"
+DETAIL:  Key (endpoint_uuid)=('f14bed27-65b0-5b32-9847-7602f2d270ff') is not present in table "endpoint".
+
+[SQL: INSERT INTO link_endpoint (link_uuid, endpoint_uuid, position) VALUES (%(link_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(link_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (link_uuid, endpoint_uuid) DO NOTHING]
+[parameters: {'link_uuid_m0': UUID('24031a3f-5285-5ea0-8eba-5bc663bdf4aa'), 'endpoint_uuid_m0': UUID('f14bed27-65b0-5b32-9847-7602f2d270ff'), 'position_m0': 0, 'link_uuid_m1': UUID('24031a3f-5285-5ea0-8eba-5bc663bdf4aa'), 'endpoint_uuid_m1': UUID('f35d8c10-0111-5138-9643-12bfdac7c32d'), 'position_m1': 1}]
+(Background on this error at: https://sqlalche.me/e/14/gkpj)"
+	debug_error_string = "UNKNOWN:Error received from peer  {grpc_status:13, grpc_message:"(psycopg2.errors.ForeignKeyViolation) insert on table \"link_endpoint\" violates foreign key constraint \"link_endpoint_endpoint_uuid_fkey\"\nDETAIL:  Key (endpoint_uuid)=(\'f14bed27-65b0-5b32-9847-7602f2d270ff\') is not present in table \"endpoint\".\n\n[SQL: INSERT INTO link_endpoint (link_uuid, endpoint_uuid, position) VALUES (%(link_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(link_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (link_uuid, endpoint_uuid) DO NOTHING]\n[parameters: {\'link_uuid_m0\': UUID(\'24031a3f-5285-5ea0-8eba-5bc663bdf4aa\'), \'endpoint_uuid_m0\': UUID(\'f14bed27-65b0-5b32-9847-7602f2d270ff\'), \'position_m0\': 0, \'link_uuid_m1\': UUID(\'24031a3f-5285-5ea0-8eba-5bc663bdf4aa\'), \'endpoint_uuid_m1\': UUID(\'f35d8c10-0111-5138-9643-12bfdac7c32d\'), \'position_m1\': 1}]\n(Background on this error at: https://sqlalche.me/e/14/gkpj)"}"
+>
+Error link OFC HUB 1/1/1==MW/192.168.27.139:5: <_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.INTERNAL
+	details = "(psycopg2.errors.ForeignKeyViolation) insert on table "link_endpoint" violates foreign key constraint "link_endpoint_endpoint_uuid_fkey"
+DETAIL:  Key (endpoint_uuid)=('f35d8c10-0111-5138-9643-12bfdac7c32d') is not present in table "endpoint".
+
+[SQL: INSERT INTO link_endpoint (link_uuid, endpoint_uuid, position) VALUES (%(link_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(link_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (link_uuid, endpoint_uuid) DO NOTHING]
+[parameters: {'link_uuid_m0': UUID('56c4dbeb-caef-508a-94fb-e63e206447d3'), 'endpoint_uuid_m0': UUID('f35d8c10-0111-5138-9643-12bfdac7c32d'), 'position_m0': 0, 'link_uuid_m1': UUID('56c4dbeb-caef-508a-94fb-e63e206447d3'), 'endpoint_uuid_m1': UUID('f14bed27-65b0-5b32-9847-7602f2d270ff'), 'position_m1': 1}]
+(Background on this error at: https://sqlalche.me/e/14/gkpj)"
+	debug_error_string = "UNKNOWN:Error received from peer  {grpc_status:13, grpc_message:"(psycopg2.errors.ForeignKeyViolation) insert on table \"link_endpoint\" violates foreign key constraint \"link_endpoint_endpoint_uuid_fkey\"\nDETAIL:  Key (endpoint_uuid)=(\'f35d8c10-0111-5138-9643-12bfdac7c32d\') is not present in table \"endpoint\".\n\n[SQL: INSERT INTO link_endpoint (link_uuid, endpoint_uuid, position) VALUES (%(link_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(link_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (link_uuid, endpoint_uuid) DO NOTHING]\n[parameters: {\'link_uuid_m0\': UUID(\'56c4dbeb-caef-508a-94fb-e63e206447d3\'), \'endpoint_uuid_m0\': UUID(\'f35d8c10-0111-5138-9643-12bfdac7c32d\'), \'position_m0\': 0, \'link_uuid_m1\': UUID(\'56c4dbeb-caef-508a-94fb-e63e206447d3\'), \'endpoint_uuid_m1\': UUID(\'f14bed27-65b0-5b32-9847-7602f2d270ff\'), \'position_m1\': 1}]\n(Background on this error at: https://sqlalche.me/e/14/gkpj)"}"
+>
+Error link OFC HUB 1/XR-T1==Optical-Splitter/common: <_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.INTERNAL
+	details = "(psycopg2.errors.ForeignKeyViolation) insert on table "link_endpoint" violates foreign key constraint "link_endpoint_endpoint_uuid_fkey"
+DETAIL:  Key (endpoint_uuid)=('889e16ad-1264-5bab-b7ab-80c9212e9b68') is not present in table "endpoint".
+
+[SQL: INSERT INTO link_endpoint (link_uuid, endpoint_uuid, position) VALUES (%(link_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(link_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (link_uuid, endpoint_uuid) DO NOTHING]
+[parameters: {'link_uuid_m0': UUID('f2fc0987-ff3d-5e08-98f9-48479ff6a724'), 'endpoint_uuid_m0': UUID('889e16ad-1264-5bab-b7ab-80c9212e9b68'), 'position_m0': 0, 'link_uuid_m1': UUID('f2fc0987-ff3d-5e08-98f9-48479ff6a724'), 'endpoint_uuid_m1': UUID('e0011a37-2caa-5d9c-85b8-3791cc7ccc65'), 'position_m1': 1}]
+(Background on this error at: https://sqlalche.me/e/14/gkpj)"
+	debug_error_string = "UNKNOWN:Error received from peer  {grpc_status:13, grpc_message:"(psycopg2.errors.ForeignKeyViolation) insert on table \"link_endpoint\" violates foreign key constraint \"link_endpoint_endpoint_uuid_fkey\"\nDETAIL:  Key (endpoint_uuid)=(\'889e16ad-1264-5bab-b7ab-80c9212e9b68\') is not present in table \"endpoint\".\n\n[SQL: INSERT INTO link_endpoint (link_uuid, endpoint_uuid, position) VALUES (%(link_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(link_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (link_uuid, endpoint_uuid) DO NOTHING]\n[parameters: {\'link_uuid_m0\': UUID(\'f2fc0987-ff3d-5e08-98f9-48479ff6a724\'), \'endpoint_uuid_m0\': UUID(\'889e16ad-1264-5bab-b7ab-80c9212e9b68\'), \'position_m0\': 0, \'link_uuid_m1\': UUID(\'f2fc0987-ff3d-5e08-98f9-48479ff6a724\'), \'endpoint_uuid_m1\': UUID(\'e0011a37-2caa-5d9c-85b8-3791cc7ccc65\'), \'position_m1\': 1}]\n(Background on this error at: https://sqlalche.me/e/14/gkpj)"}"
+>
+Error link Optical-Splitter/common==OFC HUB 1/XR-T1: <_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.INTERNAL
+	details = "(psycopg2.errors.ForeignKeyViolation) insert on table "link_endpoint" violates foreign key constraint "link_endpoint_endpoint_uuid_fkey"
+DETAIL:  Key (endpoint_uuid)=('e0011a37-2caa-5d9c-85b8-3791cc7ccc65') is not present in table "endpoint".
+
+[SQL: INSERT INTO link_endpoint (link_uuid, endpoint_uuid, position) VALUES (%(link_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(link_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (link_uuid, endpoint_uuid) DO NOTHING]
+[parameters: {'link_uuid_m0': UUID('f0a2de0a-6e25-5c56-98e1-058d6f9ffd66'), 'endpoint_uuid_m0': UUID('e0011a37-2caa-5d9c-85b8-3791cc7ccc65'), 'position_m0': 0, 'link_uuid_m1': UUID('f0a2de0a-6e25-5c56-98e1-058d6f9ffd66'), 'endpoint_uuid_m1': UUID('889e16ad-1264-5bab-b7ab-80c9212e9b68'), 'position_m1': 1}]
+(Background on this error at: https://sqlalche.me/e/14/gkpj)"
+	debug_error_string = "UNKNOWN:Error received from peer  {grpc_status:13, grpc_message:"(psycopg2.errors.ForeignKeyViolation) insert on table \"link_endpoint\" violates foreign key constraint \"link_endpoint_endpoint_uuid_fkey\"\nDETAIL:  Key (endpoint_uuid)=(\'e0011a37-2caa-5d9c-85b8-3791cc7ccc65\') is not present in table \"endpoint\".\n\n[SQL: INSERT INTO link_endpoint (link_uuid, endpoint_uuid, position) VALUES (%(link_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(link_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (link_uuid, endpoint_uuid) DO NOTHING]\n[parameters: {\'link_uuid_m0\': UUID(\'f0a2de0a-6e25-5c56-98e1-058d6f9ffd66\'), \'endpoint_uuid_m0\': UUID(\'e0011a37-2caa-5d9c-85b8-3791cc7ccc65\'), \'position_m0\': 0, \'link_uuid_m1\': UUID(\'f0a2de0a-6e25-5c56-98e1-058d6f9ffd66\'), \'endpoint_uuid_m1\': UUID(\'889e16ad-1264-5bab-b7ab-80c9212e9b68\'), \'position_m1\': 1}]\n(Background on this error at: https://sqlalche.me/e/14/gkpj)"}"
+>
+Error link Optical-Splitter/leaf1==OLS/aade6001-f00b-5e2f-a357-6a0a9d3de870: <_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.INTERNAL
+	details = "(psycopg2.errors.ForeignKeyViolation) insert on table "link_endpoint" violates foreign key constraint "link_endpoint_endpoint_uuid_fkey"
+DETAIL:  Key (endpoint_uuid)=('9f71b732-07c7-5832-beba-236ef86c2d25') is not present in table "endpoint".
+
+[SQL: INSERT INTO link_endpoint (link_uuid, endpoint_uuid, position) VALUES (%(link_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(link_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (link_uuid, endpoint_uuid) DO NOTHING]
+[parameters: {'link_uuid_m0': UUID('23a0f762-928c-52fb-ac5f-9a7b11f495ca'), 'endpoint_uuid_m0': UUID('9f71b732-07c7-5832-beba-236ef86c2d25'), 'position_m0': 0, 'link_uuid_m1': UUID('23a0f762-928c-52fb-ac5f-9a7b11f495ca'), 'endpoint_uuid_m1': UUID('aade6001-f00b-5e2f-a357-6a0a9d3de870'), 'position_m1': 1}]
+(Background on this error at: https://sqlalche.me/e/14/gkpj)"
+	debug_error_string = "UNKNOWN:Error received from peer  {grpc_status:13, grpc_message:"(psycopg2.errors.ForeignKeyViolation) insert on table \"link_endpoint\" violates foreign key constraint \"link_endpoint_endpoint_uuid_fkey\"\nDETAIL:  Key (endpoint_uuid)=(\'9f71b732-07c7-5832-beba-236ef86c2d25\') is not present in table \"endpoint\".\n\n[SQL: INSERT INTO link_endpoint (link_uuid, endpoint_uuid, position) VALUES (%(link_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(link_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (link_uuid, endpoint_uuid) DO NOTHING]\n[parameters: {\'link_uuid_m0\': UUID(\'23a0f762-928c-52fb-ac5f-9a7b11f495ca\'), \'endpoint_uuid_m0\': UUID(\'9f71b732-07c7-5832-beba-236ef86c2d25\'), \'position_m0\': 0, \'link_uuid_m1\': UUID(\'23a0f762-928c-52fb-ac5f-9a7b11f495ca\'), \'endpoint_uuid_m1\': UUID(\'aade6001-f00b-5e2f-a357-6a0a9d3de870\'), \'position_m1\': 1}]\n(Background on this error at: https://sqlalche.me/e/14/gkpj)"}"
+>
+Error link OLS/79516f5e-55a0-5671-977a-1f5cc934e700==Optical-Splitter/leaf1: <_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.INTERNAL
+	details = "(psycopg2.errors.ForeignKeyViolation) insert on table "link_endpoint" violates foreign key constraint "link_endpoint_endpoint_uuid_fkey"
+DETAIL:  Key (endpoint_uuid)=('79516f5e-55a0-5671-977a-1f5cc934e700') is not present in table "endpoint".
+
+[SQL: INSERT INTO link_endpoint (link_uuid, endpoint_uuid, position) VALUES (%(link_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(link_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (link_uuid, endpoint_uuid) DO NOTHING]
+[parameters: {'link_uuid_m0': UUID('e8ce9035-ca1c-513c-bd58-660d51b6bbcd'), 'endpoint_uuid_m0': UUID('79516f5e-55a0-5671-977a-1f5cc934e700'), 'position_m0': 0, 'link_uuid_m1': UUID('e8ce9035-ca1c-513c-bd58-660d51b6bbcd'), 'endpoint_uuid_m1': UUID('9f71b732-07c7-5832-beba-236ef86c2d25'), 'position_m1': 1}]
+(Background on this error at: https://sqlalche.me/e/14/gkpj)"
+	debug_error_string = "UNKNOWN:Error received from peer  {grpc_status:13, grpc_message:"(psycopg2.errors.ForeignKeyViolation) insert on table \"link_endpoint\" violates foreign key constraint \"link_endpoint_endpoint_uuid_fkey\"\nDETAIL:  Key (endpoint_uuid)=(\'79516f5e-55a0-5671-977a-1f5cc934e700\') is not present in table \"endpoint\".\n\n[SQL: INSERT INTO link_endpoint (link_uuid, endpoint_uuid, position) VALUES (%(link_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(link_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (link_uuid, endpoint_uuid) DO NOTHING]\n[parameters: {\'link_uuid_m0\': UUID(\'e8ce9035-ca1c-513c-bd58-660d51b6bbcd\'), \'endpoint_uuid_m0\': UUID(\'79516f5e-55a0-5671-977a-1f5cc934e700\'), \'position_m0\': 0, \'link_uuid_m1\': UUID(\'e8ce9035-ca1c-513c-bd58-660d51b6bbcd\'), \'endpoint_uuid_m1\': UUID(\'9f71b732-07c7-5832-beba-236ef86c2d25\'), \'position_m1\': 1}]\n(Background on this error at: https://sqlalche.me/e/14/gkpj)"}"
+>
+Error link Optical-Splitter/leaf2==OLS/eb287d83-f05e-53ec-ab5a-adf6bd2b5418: <_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.INTERNAL
+	details = "(psycopg2.errors.ForeignKeyViolation) insert on table "link_endpoint" violates foreign key constraint "link_endpoint_endpoint_uuid_fkey"
+DETAIL:  Key (endpoint_uuid)=('a852abc2-3c51-53a9-a6ab-7bd91f7caf32') is not present in table "endpoint".
+
+[SQL: INSERT INTO link_endpoint (link_uuid, endpoint_uuid, position) VALUES (%(link_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(link_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (link_uuid, endpoint_uuid) DO NOTHING]
+[parameters: {'link_uuid_m0': UUID('ccfaaed3-0b7f-518b-b24e-4c7024c25d18'), 'endpoint_uuid_m0': UUID('a852abc2-3c51-53a9-a6ab-7bd91f7caf32'), 'position_m0': 0, 'link_uuid_m1': UUID('ccfaaed3-0b7f-518b-b24e-4c7024c25d18'), 'endpoint_uuid_m1': UUID('eb287d83-f05e-53ec-ab5a-adf6bd2b5418'), 'position_m1': 1}]
+(Background on this error at: https://sqlalche.me/e/14/gkpj)"
+	debug_error_string = "UNKNOWN:Error received from peer  {grpc_status:13, grpc_message:"(psycopg2.errors.ForeignKeyViolation) insert on table \"link_endpoint\" violates foreign key constraint \"link_endpoint_endpoint_uuid_fkey\"\nDETAIL:  Key (endpoint_uuid)=(\'a852abc2-3c51-53a9-a6ab-7bd91f7caf32\') is not present in table \"endpoint\".\n\n[SQL: INSERT INTO link_endpoint (link_uuid, endpoint_uuid, position) VALUES (%(link_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(link_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (link_uuid, endpoint_uuid) DO NOTHING]\n[parameters: {\'link_uuid_m0\': UUID(\'ccfaaed3-0b7f-518b-b24e-4c7024c25d18\'), \'endpoint_uuid_m0\': UUID(\'a852abc2-3c51-53a9-a6ab-7bd91f7caf32\'), \'position_m0\': 0, \'link_uuid_m1\': UUID(\'ccfaaed3-0b7f-518b-b24e-4c7024c25d18\'), \'endpoint_uuid_m1\': UUID(\'eb287d83-f05e-53ec-ab5a-adf6bd2b5418\'), \'position_m1\': 1}]\n(Background on this error at: https://sqlalche.me/e/14/gkpj)"}"
+>
+Error link OLS/30d9323e-b916-51ce-a9a8-cf88f62eb77f==Optical-Splitter/leaf2: <_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.INTERNAL
+	details = "(psycopg2.errors.ForeignKeyViolation) insert on table "link_endpoint" violates foreign key constraint "link_endpoint_endpoint_uuid_fkey"
+DETAIL:  Key (endpoint_uuid)=('30d9323e-b916-51ce-a9a8-cf88f62eb77f') is not present in table "endpoint".
+
+[SQL: INSERT INTO link_endpoint (link_uuid, endpoint_uuid, position) VALUES (%(link_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(link_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (link_uuid, endpoint_uuid) DO NOTHING]
+[parameters: {'link_uuid_m0': UUID('fcef8239-3cc8-5cb3-86d7-4359d0cbe6ba'), 'endpoint_uuid_m0': UUID('30d9323e-b916-51ce-a9a8-cf88f62eb77f'), 'position_m0': 0, 'link_uuid_m1': UUID('fcef8239-3cc8-5cb3-86d7-4359d0cbe6ba'), 'endpoint_uuid_m1': UUID('a852abc2-3c51-53a9-a6ab-7bd91f7caf32'), 'position_m1': 1}]
+(Background on this error at: https://sqlalche.me/e/14/gkpj)"
+	debug_error_string = "UNKNOWN:Error received from peer  {grpc_status:13, grpc_message:"(psycopg2.errors.ForeignKeyViolation) insert on table \"link_endpoint\" violates foreign key constraint \"link_endpoint_endpoint_uuid_fkey\"\nDETAIL:  Key (endpoint_uuid)=(\'30d9323e-b916-51ce-a9a8-cf88f62eb77f\') is not present in table \"endpoint\".\n\n[SQL: INSERT INTO link_endpoint (link_uuid, endpoint_uuid, position) VALUES (%(link_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(link_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (link_uuid, endpoint_uuid) DO NOTHING]\n[parameters: {\'link_uuid_m0\': UUID(\'fcef8239-3cc8-5cb3-86d7-4359d0cbe6ba\'), \'endpoint_uuid_m0\': UUID(\'30d9323e-b916-51ce-a9a8-cf88f62eb77f\'), \'position_m0\': 0, \'link_uuid_m1\': UUID(\'fcef8239-3cc8-5cb3-86d7-4359d0cbe6ba\'), \'endpoint_uuid_m1\': UUID(\'a852abc2-3c51-53a9-a6ab-7bd91f7caf32\'), \'position_m1\': 1}]\n(Background on this error at: https://sqlalche.me/e/14/gkpj)"}"
+>
+Error link OFC LEAF 1/XR-T1==OLS/0ef74f99-1acc-57bd-ab9d-4b958b06c513: <_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.INTERNAL
+	details = "(psycopg2.errors.ForeignKeyViolation) insert on table "link_endpoint" violates foreign key constraint "link_endpoint_endpoint_uuid_fkey"
+DETAIL:  Key (endpoint_uuid)=('3b51247b-2c01-5da0-8947-ac44c4b0aa0c') is not present in table "endpoint".
+
+[SQL: INSERT INTO link_endpoint (link_uuid, endpoint_uuid, position) VALUES (%(link_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(link_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (link_uuid, endpoint_uuid) DO NOTHING]
+[parameters: {'link_uuid_m0': UUID('4fe4f768-6be7-5e81-a10c-0f79b477a9e7'), 'endpoint_uuid_m0': UUID('3b51247b-2c01-5da0-8947-ac44c4b0aa0c'), 'position_m0': 0, 'link_uuid_m1': UUID('4fe4f768-6be7-5e81-a10c-0f79b477a9e7'), 'endpoint_uuid_m1': UUID('0ef74f99-1acc-57bd-ab9d-4b958b06c513'), 'position_m1': 1}]
+(Background on this error at: https://sqlalche.me/e/14/gkpj)"
+	debug_error_string = "UNKNOWN:Error received from peer  {grpc_status:13, grpc_message:"(psycopg2.errors.ForeignKeyViolation) insert on table \"link_endpoint\" violates foreign key constraint \"link_endpoint_endpoint_uuid_fkey\"\nDETAIL:  Key (endpoint_uuid)=(\'3b51247b-2c01-5da0-8947-ac44c4b0aa0c\') is not present in table \"endpoint\".\n\n[SQL: INSERT INTO link_endpoint (link_uuid, endpoint_uuid, position) VALUES (%(link_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(link_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (link_uuid, endpoint_uuid) DO NOTHING]\n[parameters: {\'link_uuid_m0\': UUID(\'4fe4f768-6be7-5e81-a10c-0f79b477a9e7\'), \'endpoint_uuid_m0\': UUID(\'3b51247b-2c01-5da0-8947-ac44c4b0aa0c\'), \'position_m0\': 0, \'link_uuid_m1\': UUID(\'4fe4f768-6be7-5e81-a10c-0f79b477a9e7\'), \'endpoint_uuid_m1\': UUID(\'0ef74f99-1acc-57bd-ab9d-4b958b06c513\'), \'position_m1\': 1}]\n(Background on this error at: https://sqlalche.me/e/14/gkpj)"}"
+>
+Error link OLS/68ac012e-54d4-5846-b5dc-6ec356404f90==OFC LEAF 1/XR-T1: <_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.INTERNAL
+	details = "(psycopg2.errors.ForeignKeyViolation) insert on table "link_endpoint" violates foreign key constraint "link_endpoint_endpoint_uuid_fkey"
+DETAIL:  Key (endpoint_uuid)=('68ac012e-54d4-5846-b5dc-6ec356404f90') is not present in table "endpoint".
+
+[SQL: INSERT INTO link_endpoint (link_uuid, endpoint_uuid, position) VALUES (%(link_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(link_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (link_uuid, endpoint_uuid) DO NOTHING]
+[parameters: {'link_uuid_m0': UUID('4633b79f-d738-5640-b933-111a84b55e87'), 'endpoint_uuid_m0': UUID('68ac012e-54d4-5846-b5dc-6ec356404f90'), 'position_m0': 0, 'link_uuid_m1': UUID('4633b79f-d738-5640-b933-111a84b55e87'), 'endpoint_uuid_m1': UUID('3b51247b-2c01-5da0-8947-ac44c4b0aa0c'), 'position_m1': 1}]
+(Background on this error at: https://sqlalche.me/e/14/gkpj)"
+	debug_error_string = "UNKNOWN:Error received from peer  {grpc_status:13, grpc_message:"(psycopg2.errors.ForeignKeyViolation) insert on table \"link_endpoint\" violates foreign key constraint \"link_endpoint_endpoint_uuid_fkey\"\nDETAIL:  Key (endpoint_uuid)=(\'68ac012e-54d4-5846-b5dc-6ec356404f90\') is not present in table \"endpoint\".\n\n[SQL: INSERT INTO link_endpoint (link_uuid, endpoint_uuid, position) VALUES (%(link_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(link_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (link_uuid, endpoint_uuid) DO NOTHING]\n[parameters: {\'link_uuid_m0\': UUID(\'4633b79f-d738-5640-b933-111a84b55e87\'), \'endpoint_uuid_m0\': UUID(\'68ac012e-54d4-5846-b5dc-6ec356404f90\'), \'position_m0\': 0, \'link_uuid_m1\': UUID(\'4633b79f-d738-5640-b933-111a84b55e87\'), \'endpoint_uuid_m1\': UUID(\'3b51247b-2c01-5da0-8947-ac44c4b0aa0c\'), \'position_m1\': 1}]\n(Background on this error at: https://sqlalche.me/e/14/gkpj)"}"
+>
+Error link OFC LEAF 2/XR-T1==OLS/50296d99-58cc-5ce7-82f5-fc8ee4eec2ec: <_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.INTERNAL
+	details = "(psycopg2.errors.ForeignKeyViolation) insert on table "link_endpoint" violates foreign key constraint "link_endpoint_endpoint_uuid_fkey"
+DETAIL:  Key (endpoint_uuid)=('a7111d0f-f260-58ee-81db-538080d978b3') is not present in table "endpoint".
+
+[SQL: INSERT INTO link_endpoint (link_uuid, endpoint_uuid, position) VALUES (%(link_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(link_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (link_uuid, endpoint_uuid) DO NOTHING]
+[parameters: {'link_uuid_m0': UUID('10b83e66-1e0f-5524-a6ca-a9cb2a21e1ad'), 'endpoint_uuid_m0': UUID('a7111d0f-f260-58ee-81db-538080d978b3'), 'position_m0': 0, 'link_uuid_m1': UUID('10b83e66-1e0f-5524-a6ca-a9cb2a21e1ad'), 'endpoint_uuid_m1': UUID('50296d99-58cc-5ce7-82f5-fc8ee4eec2ec'), 'position_m1': 1}]
+(Background on this error at: https://sqlalche.me/e/14/gkpj)"
+	debug_error_string = "UNKNOWN:Error received from peer  {grpc_status:13, grpc_message:"(psycopg2.errors.ForeignKeyViolation) insert on table \"link_endpoint\" violates foreign key constraint \"link_endpoint_endpoint_uuid_fkey\"\nDETAIL:  Key (endpoint_uuid)=(\'a7111d0f-f260-58ee-81db-538080d978b3\') is not present in table \"endpoint\".\n\n[SQL: INSERT INTO link_endpoint (link_uuid, endpoint_uuid, position) VALUES (%(link_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(link_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (link_uuid, endpoint_uuid) DO NOTHING]\n[parameters: {\'link_uuid_m0\': UUID(\'10b83e66-1e0f-5524-a6ca-a9cb2a21e1ad\'), \'endpoint_uuid_m0\': UUID(\'a7111d0f-f260-58ee-81db-538080d978b3\'), \'position_m0\': 0, \'link_uuid_m1\': UUID(\'10b83e66-1e0f-5524-a6ca-a9cb2a21e1ad\'), \'endpoint_uuid_m1\': UUID(\'50296d99-58cc-5ce7-82f5-fc8ee4eec2ec\'), \'position_m1\': 1}]\n(Background on this error at: https://sqlalche.me/e/14/gkpj)"}"
+>
+Error link OLS/367b19b1-3172-54d8-bdd4-12d3ac5604f6==OFC LEAF 2/XR-T1: <_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.INTERNAL
+	details = "(psycopg2.errors.ForeignKeyViolation) insert on table "link_endpoint" violates foreign key constraint "link_endpoint_endpoint_uuid_fkey"
+DETAIL:  Key (endpoint_uuid)=('367b19b1-3172-54d8-bdd4-12d3ac5604f6') is not present in table "endpoint".
+
+[SQL: INSERT INTO link_endpoint (link_uuid, endpoint_uuid, position) VALUES (%(link_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(link_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (link_uuid, endpoint_uuid) DO NOTHING]
+[parameters: {'link_uuid_m0': UUID('53a48f65-2a90-5040-8b51-b939959201fb'), 'endpoint_uuid_m0': UUID('367b19b1-3172-54d8-bdd4-12d3ac5604f6'), 'position_m0': 0, 'link_uuid_m1': UUID('53a48f65-2a90-5040-8b51-b939959201fb'), 'endpoint_uuid_m1': UUID('a7111d0f-f260-58ee-81db-538080d978b3'), 'position_m1': 1}]
+(Background on this error at: https://sqlalche.me/e/14/gkpj)"
+	debug_error_string = "UNKNOWN:Error received from peer  {grpc_status:13, grpc_message:"(psycopg2.errors.ForeignKeyViolation) insert on table \"link_endpoint\" violates foreign key constraint \"link_endpoint_endpoint_uuid_fkey\"\nDETAIL:  Key (endpoint_uuid)=(\'367b19b1-3172-54d8-bdd4-12d3ac5604f6\') is not present in table \"endpoint\".\n\n[SQL: INSERT INTO link_endpoint (link_uuid, endpoint_uuid, position) VALUES (%(link_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(link_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (link_uuid, endpoint_uuid) DO NOTHING]\n[parameters: {\'link_uuid_m0\': UUID(\'53a48f65-2a90-5040-8b51-b939959201fb\'), \'endpoint_uuid_m0\': UUID(\'367b19b1-3172-54d8-bdd4-12d3ac5604f6\'), \'position_m0\': 0, \'link_uuid_m1\': UUID(\'53a48f65-2a90-5040-8b51-b939959201fb\'), \'endpoint_uuid_m1\': UUID(\'a7111d0f-f260-58ee-81db-538080d978b3\'), \'position_m1\': 1}]\n(Background on this error at: https://sqlalche.me/e/14/gkpj)"}"
+>
+Error link OFC LEAF 1/1/1==R155/eth-1/0/25: <_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.INTERNAL
+	details = "(psycopg2.errors.ForeignKeyViolation) insert on table "link_endpoint" violates foreign key constraint "link_endpoint_endpoint_uuid_fkey"
+DETAIL:  Key (endpoint_uuid)=('04998fc0-1fed-5802-be5b-0147fd57ad5d') is not present in table "endpoint".
+
+[SQL: INSERT INTO link_endpoint (link_uuid, endpoint_uuid, position) VALUES (%(link_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(link_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (link_uuid, endpoint_uuid) DO NOTHING]
+[parameters: {'link_uuid_m0': UUID('4b3bdeae-949c-59fb-b48d-63d9a9bfdcbe'), 'endpoint_uuid_m0': UUID('04998fc0-1fed-5802-be5b-0147fd57ad5d'), 'position_m0': 0, 'link_uuid_m1': UUID('4b3bdeae-949c-59fb-b48d-63d9a9bfdcbe'), 'endpoint_uuid_m1': UUID('14a10230-b666-55bf-b699-6f7e13f3589c'), 'position_m1': 1}]
+(Background on this error at: https://sqlalche.me/e/14/gkpj)"
+	debug_error_string = "UNKNOWN:Error received from peer  {grpc_status:13, grpc_message:"(psycopg2.errors.ForeignKeyViolation) insert on table \"link_endpoint\" violates foreign key constraint \"link_endpoint_endpoint_uuid_fkey\"\nDETAIL:  Key (endpoint_uuid)=(\'04998fc0-1fed-5802-be5b-0147fd57ad5d\') is not present in table \"endpoint\".\n\n[SQL: INSERT INTO link_endpoint (link_uuid, endpoint_uuid, position) VALUES (%(link_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(link_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (link_uuid, endpoint_uuid) DO NOTHING]\n[parameters: {\'link_uuid_m0\': UUID(\'4b3bdeae-949c-59fb-b48d-63d9a9bfdcbe\'), \'endpoint_uuid_m0\': UUID(\'04998fc0-1fed-5802-be5b-0147fd57ad5d\'), \'position_m0\': 0, \'link_uuid_m1\': UUID(\'4b3bdeae-949c-59fb-b48d-63d9a9bfdcbe\'), \'endpoint_uuid_m1\': UUID(\'14a10230-b666-55bf-b699-6f7e13f3589c\'), \'position_m1\': 1}]\n(Background on this error at: https://sqlalche.me/e/14/gkpj)"}"
+>
+Error link R155/eth-1/0/25==OFC LEAF 1/1/1: <_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.INTERNAL
+	details = "(psycopg2.errors.ForeignKeyViolation) insert on table "link_endpoint" violates foreign key constraint "link_endpoint_endpoint_uuid_fkey"
+DETAIL:  Key (endpoint_uuid)=('14a10230-b666-55bf-b699-6f7e13f3589c') is not present in table "endpoint".
+
+[SQL: INSERT INTO link_endpoint (link_uuid, endpoint_uuid, position) VALUES (%(link_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(link_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (link_uuid, endpoint_uuid) DO NOTHING]
+[parameters: {'link_uuid_m0': UUID('20c9cc66-b243-5af0-b6be-5b5796aeabd6'), 'endpoint_uuid_m0': UUID('14a10230-b666-55bf-b699-6f7e13f3589c'), 'position_m0': 0, 'link_uuid_m1': UUID('20c9cc66-b243-5af0-b6be-5b5796aeabd6'), 'endpoint_uuid_m1': UUID('04998fc0-1fed-5802-be5b-0147fd57ad5d'), 'position_m1': 1}]
+(Background on this error at: https://sqlalche.me/e/14/gkpj)"
+	debug_error_string = "UNKNOWN:Error received from peer  {grpc_status:13, grpc_message:"(psycopg2.errors.ForeignKeyViolation) insert on table \"link_endpoint\" violates foreign key constraint \"link_endpoint_endpoint_uuid_fkey\"\nDETAIL:  Key (endpoint_uuid)=(\'14a10230-b666-55bf-b699-6f7e13f3589c\') is not present in table \"endpoint\".\n\n[SQL: INSERT INTO link_endpoint (link_uuid, endpoint_uuid, position) VALUES (%(link_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(link_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (link_uuid, endpoint_uuid) DO NOTHING]\n[parameters: {\'link_uuid_m0\': UUID(\'20c9cc66-b243-5af0-b6be-5b5796aeabd6\'), \'endpoint_uuid_m0\': UUID(\'14a10230-b666-55bf-b699-6f7e13f3589c\'), \'position_m0\': 0, \'link_uuid_m1\': UUID(\'20c9cc66-b243-5af0-b6be-5b5796aeabd6\'), \'endpoint_uuid_m1\': UUID(\'04998fc0-1fed-5802-be5b-0147fd57ad5d\'), \'position_m1\': 1}]\n(Background on this error at: https://sqlalche.me/e/14/gkpj)"}"
+>
+Error link OFC LEAF 2/1/1==R199/eth-1/0/20: <_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.INTERNAL
+	details = "(psycopg2.errors.ForeignKeyViolation) insert on table "link_endpoint" violates foreign key constraint "link_endpoint_endpoint_uuid_fkey"
+DETAIL:  Key (endpoint_uuid)=('66e6ee40-369e-5e13-824c-5b392b1fb967') is not present in table "endpoint".
+
+[SQL: INSERT INTO link_endpoint (link_uuid, endpoint_uuid, position) VALUES (%(link_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(link_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (link_uuid, endpoint_uuid) DO NOTHING]
+[parameters: {'link_uuid_m0': UUID('4fb6b63e-4bed-5b54-b95f-d36514382ee4'), 'endpoint_uuid_m0': UUID('66e6ee40-369e-5e13-824c-5b392b1fb967'), 'position_m0': 0, 'link_uuid_m1': UUID('4fb6b63e-4bed-5b54-b95f-d36514382ee4'), 'endpoint_uuid_m1': UUID('1b773a03-f3d0-53e6-98ad-cb3f6c5983da'), 'position_m1': 1}]
+(Background on this error at: https://sqlalche.me/e/14/gkpj)"
+	debug_error_string = "UNKNOWN:Error received from peer  {grpc_status:13, grpc_message:"(psycopg2.errors.ForeignKeyViolation) insert on table \"link_endpoint\" violates foreign key constraint \"link_endpoint_endpoint_uuid_fkey\"\nDETAIL:  Key (endpoint_uuid)=(\'66e6ee40-369e-5e13-824c-5b392b1fb967\') is not present in table \"endpoint\".\n\n[SQL: INSERT INTO link_endpoint (link_uuid, endpoint_uuid, position) VALUES (%(link_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(link_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (link_uuid, endpoint_uuid) DO NOTHING]\n[parameters: {\'link_uuid_m0\': UUID(\'4fb6b63e-4bed-5b54-b95f-d36514382ee4\'), \'endpoint_uuid_m0\': UUID(\'66e6ee40-369e-5e13-824c-5b392b1fb967\'), \'position_m0\': 0, \'link_uuid_m1\': UUID(\'4fb6b63e-4bed-5b54-b95f-d36514382ee4\'), \'endpoint_uuid_m1\': UUID(\'1b773a03-f3d0-53e6-98ad-cb3f6c5983da\'), \'position_m1\': 1}]\n(Background on this error at: https://sqlalche.me/e/14/gkpj)"}"
+>
+Error link R199/eth-1/0/20==OFC LEAF 2/1/1: <_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.INTERNAL
+	details = "(psycopg2.errors.ForeignKeyViolation) insert on table "link_endpoint" violates foreign key constraint "link_endpoint_endpoint_uuid_fkey"
+DETAIL:  Key (endpoint_uuid)=('1b773a03-f3d0-53e6-98ad-cb3f6c5983da') is not present in table "endpoint".
+
+[SQL: INSERT INTO link_endpoint (link_uuid, endpoint_uuid, position) VALUES (%(link_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(link_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (link_uuid, endpoint_uuid) DO NOTHING]
+[parameters: {'link_uuid_m0': UUID('a03cdc8d-11ef-5524-b03f-55e2774bce3f'), 'endpoint_uuid_m0': UUID('1b773a03-f3d0-53e6-98ad-cb3f6c5983da'), 'position_m0': 0, 'link_uuid_m1': UUID('a03cdc8d-11ef-5524-b03f-55e2774bce3f'), 'endpoint_uuid_m1': UUID('66e6ee40-369e-5e13-824c-5b392b1fb967'), 'position_m1': 1}]
+(Background on this error at: https://sqlalche.me/e/14/gkpj)"
+	debug_error_string = "UNKNOWN:Error received from peer  {grpc_status:13, grpc_message:"(psycopg2.errors.ForeignKeyViolation) insert on table \"link_endpoint\" violates foreign key constraint \"link_endpoint_endpoint_uuid_fkey\"\nDETAIL:  Key (endpoint_uuid)=(\'1b773a03-f3d0-53e6-98ad-cb3f6c5983da\') is not present in table \"endpoint\".\n\n[SQL: INSERT INTO link_endpoint (link_uuid, endpoint_uuid, position) VALUES (%(link_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(link_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (link_uuid, endpoint_uuid) DO NOTHING]\n[parameters: {\'link_uuid_m0\': UUID(\'a03cdc8d-11ef-5524-b03f-55e2774bce3f\'), \'endpoint_uuid_m0\': UUID(\'1b773a03-f3d0-53e6-98ad-cb3f6c5983da\'), \'position_m0\': 0, \'link_uuid_m1\': UUID(\'a03cdc8d-11ef-5524-b03f-55e2774bce3f\'), \'endpoint_uuid_m1\': UUID(\'66e6ee40-369e-5e13-824c-5b392b1fb967\'), \'position_m1\': 1}]\n(Background on this error at: https://sqlalche.me/e/14/gkpj)"}"
+>
+Error link R155/eth-1/0/22==DC2/eth1: <_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.INTERNAL
+	details = "(psycopg2.errors.ForeignKeyViolation) insert on table "link_endpoint" violates foreign key constraint "link_endpoint_endpoint_uuid_fkey"
+DETAIL:  Key (endpoint_uuid)=('77905600-b1dc-5920-9d8a-d2aaed83a1b1') is not present in table "endpoint".
+
+[SQL: INSERT INTO link_endpoint (link_uuid, endpoint_uuid, position) VALUES (%(link_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(link_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (link_uuid, endpoint_uuid) DO NOTHING]
+[parameters: {'link_uuid_m0': UUID('2233328e-c6e8-57a1-b1c1-c4177a61ecd0'), 'endpoint_uuid_m0': UUID('77905600-b1dc-5920-9d8a-d2aaed83a1b1'), 'position_m0': 0, 'link_uuid_m1': UUID('2233328e-c6e8-57a1-b1c1-c4177a61ecd0'), 'endpoint_uuid_m1': UUID('06bb0b92-8783-5599-aa20-15bfbe241348'), 'position_m1': 1}]
+(Background on this error at: https://sqlalche.me/e/14/gkpj)"
+	debug_error_string = "UNKNOWN:Error received from peer  {grpc_status:13, grpc_message:"(psycopg2.errors.ForeignKeyViolation) insert on table \"link_endpoint\" violates foreign key constraint \"link_endpoint_endpoint_uuid_fkey\"\nDETAIL:  Key (endpoint_uuid)=(\'77905600-b1dc-5920-9d8a-d2aaed83a1b1\') is not present in table \"endpoint\".\n\n[SQL: INSERT INTO link_endpoint (link_uuid, endpoint_uuid, position) VALUES (%(link_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(link_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (link_uuid, endpoint_uuid) DO NOTHING]\n[parameters: {\'link_uuid_m0\': UUID(\'2233328e-c6e8-57a1-b1c1-c4177a61ecd0\'), \'endpoint_uuid_m0\': UUID(\'77905600-b1dc-5920-9d8a-d2aaed83a1b1\'), \'position_m0\': 0, \'link_uuid_m1\': UUID(\'2233328e-c6e8-57a1-b1c1-c4177a61ecd0\'), \'endpoint_uuid_m1\': UUID(\'06bb0b92-8783-5599-aa20-15bfbe241348\'), \'position_m1\': 1}]\n(Background on this error at: https://sqlalche.me/e/14/gkpj)"}"
+>
+Error link DC2/eth1==R155/eth-1/0/22: <_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.INTERNAL
+	details = "(psycopg2.errors.ForeignKeyViolation) insert on table "link_endpoint" violates foreign key constraint "link_endpoint_endpoint_uuid_fkey"
+DETAIL:  Key (endpoint_uuid)=('06bb0b92-8783-5599-aa20-15bfbe241348') is not present in table "endpoint".
+
+[SQL: INSERT INTO link_endpoint (link_uuid, endpoint_uuid, position) VALUES (%(link_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(link_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (link_uuid, endpoint_uuid) DO NOTHING]
+[parameters: {'link_uuid_m0': UUID('04c925c2-ecea-5cc8-b8ae-88daf78d1eb6'), 'endpoint_uuid_m0': UUID('06bb0b92-8783-5599-aa20-15bfbe241348'), 'position_m0': 0, 'link_uuid_m1': UUID('04c925c2-ecea-5cc8-b8ae-88daf78d1eb6'), 'endpoint_uuid_m1': UUID('77905600-b1dc-5920-9d8a-d2aaed83a1b1'), 'position_m1': 1}]
+(Background on this error at: https://sqlalche.me/e/14/gkpj)"
+	debug_error_string = "UNKNOWN:Error received from peer  {grpc_status:13, grpc_message:"(psycopg2.errors.ForeignKeyViolation) insert on table \"link_endpoint\" violates foreign key constraint \"link_endpoint_endpoint_uuid_fkey\"\nDETAIL:  Key (endpoint_uuid)=(\'06bb0b92-8783-5599-aa20-15bfbe241348\') is not present in table \"endpoint\".\n\n[SQL: INSERT INTO link_endpoint (link_uuid, endpoint_uuid, position) VALUES (%(link_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(link_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (link_uuid, endpoint_uuid) DO NOTHING]\n[parameters: {\'link_uuid_m0\': UUID(\'04c925c2-ecea-5cc8-b8ae-88daf78d1eb6\'), \'endpoint_uuid_m0\': UUID(\'06bb0b92-8783-5599-aa20-15bfbe241348\'), \'position_m0\': 0, \'link_uuid_m1\': UUID(\'04c925c2-ecea-5cc8-b8ae-88daf78d1eb6\'), \'endpoint_uuid_m1\': UUID(\'77905600-b1dc-5920-9d8a-d2aaed83a1b1\'), \'position_m1\': 1}]\n(Background on this error at: https://sqlalche.me/e/14/gkpj)"}"
+>
+Error link R199/eth-1/0/21==DC2/eth2: <_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.INTERNAL
+	details = "(psycopg2.errors.ForeignKeyViolation) insert on table "link_endpoint" violates foreign key constraint "link_endpoint_endpoint_uuid_fkey"
+DETAIL:  Key (endpoint_uuid)=('fc4a92bf-49a8-546c-9cb8-4182492da1a5') is not present in table "endpoint".
+
+[SQL: INSERT INTO link_endpoint (link_uuid, endpoint_uuid, position) VALUES (%(link_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(link_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (link_uuid, endpoint_uuid) DO NOTHING]
+[parameters: {'link_uuid_m0': UUID('665df7ce-82d2-557c-804e-1592e955e96b'), 'endpoint_uuid_m0': UUID('fc4a92bf-49a8-546c-9cb8-4182492da1a5'), 'position_m0': 0, 'link_uuid_m1': UUID('665df7ce-82d2-557c-804e-1592e955e96b'), 'endpoint_uuid_m1': UUID('6a6859c3-4a13-513c-a7dd-490c8b2931b1'), 'position_m1': 1}]
+(Background on this error at: https://sqlalche.me/e/14/gkpj)"
+	debug_error_string = "UNKNOWN:Error received from peer  {grpc_status:13, grpc_message:"(psycopg2.errors.ForeignKeyViolation) insert on table \"link_endpoint\" violates foreign key constraint \"link_endpoint_endpoint_uuid_fkey\"\nDETAIL:  Key (endpoint_uuid)=(\'fc4a92bf-49a8-546c-9cb8-4182492da1a5\') is not present in table \"endpoint\".\n\n[SQL: INSERT INTO link_endpoint (link_uuid, endpoint_uuid, position) VALUES (%(link_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(link_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (link_uuid, endpoint_uuid) DO NOTHING]\n[parameters: {\'link_uuid_m0\': UUID(\'665df7ce-82d2-557c-804e-1592e955e96b\'), \'endpoint_uuid_m0\': UUID(\'fc4a92bf-49a8-546c-9cb8-4182492da1a5\'), \'position_m0\': 0, \'link_uuid_m1\': UUID(\'665df7ce-82d2-557c-804e-1592e955e96b\'), \'endpoint_uuid_m1\': UUID(\'6a6859c3-4a13-513c-a7dd-490c8b2931b1\'), \'position_m1\': 1}]\n(Background on this error at: https://sqlalche.me/e/14/gkpj)"}"
+>
+Error link DC2/eth2==R199/eth-1/0/21: <_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.INTERNAL
+	details = "(psycopg2.errors.ForeignKeyViolation) insert on table "link_endpoint" violates foreign key constraint "link_endpoint_endpoint_uuid_fkey"
+DETAIL:  Key (endpoint_uuid)=('6a6859c3-4a13-513c-a7dd-490c8b2931b1') is not present in table "endpoint".
+
+[SQL: INSERT INTO link_endpoint (link_uuid, endpoint_uuid, position) VALUES (%(link_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(link_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (link_uuid, endpoint_uuid) DO NOTHING]
+[parameters: {'link_uuid_m0': UUID('793ea7ff-7459-5a4e-9c69-51dc6b7b2376'), 'endpoint_uuid_m0': UUID('6a6859c3-4a13-513c-a7dd-490c8b2931b1'), 'position_m0': 0, 'link_uuid_m1': UUID('793ea7ff-7459-5a4e-9c69-51dc6b7b2376'), 'endpoint_uuid_m1': UUID('fc4a92bf-49a8-546c-9cb8-4182492da1a5'), 'position_m1': 1}]
+(Background on this error at: https://sqlalche.me/e/14/gkpj)"
+	debug_error_string = "UNKNOWN:Error received from peer  {grpc_status:13, grpc_message:"(psycopg2.errors.ForeignKeyViolation) insert on table \"link_endpoint\" violates foreign key constraint \"link_endpoint_endpoint_uuid_fkey\"\nDETAIL:  Key (endpoint_uuid)=(\'6a6859c3-4a13-513c-a7dd-490c8b2931b1\') is not present in table \"endpoint\".\n\n[SQL: INSERT INTO link_endpoint (link_uuid, endpoint_uuid, position) VALUES (%(link_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(link_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (link_uuid, endpoint_uuid) DO NOTHING]\n[parameters: {\'link_uuid_m0\': UUID(\'793ea7ff-7459-5a4e-9c69-51dc6b7b2376\'), \'endpoint_uuid_m0\': UUID(\'6a6859c3-4a13-513c-a7dd-490c8b2931b1\'), \'position_m0\': 0, \'link_uuid_m1\': UUID(\'793ea7ff-7459-5a4e-9c69-51dc6b7b2376\'), \'endpoint_uuid_m1\': UUID(\'fc4a92bf-49a8-546c-9cb8-4182492da1a5\'), \'position_m1\': 1}]\n(Background on this error at: https://sqlalche.me/e/14/gkpj)"}"
+>
+Error link PE1/2/3==PE3/2/1: <_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.INTERNAL
+	details = "(psycopg2.errors.ForeignKeyViolation) insert on table "link_endpoint" violates foreign key constraint "link_endpoint_endpoint_uuid_fkey"
+DETAIL:  Key (endpoint_uuid)=('a52a2fad-8488-5747-9f40-47bedb92533e') is not present in table "endpoint".
+
+[SQL: INSERT INTO link_endpoint (link_uuid, endpoint_uuid, position) VALUES (%(link_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(link_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (link_uuid, endpoint_uuid) DO NOTHING]
+[parameters: {'link_uuid_m0': UUID('69e0f404-68bd-5319-b104-86cd294fb5a7'), 'endpoint_uuid_m0': UUID('a52a2fad-8488-5747-9f40-47bedb92533e'), 'position_m0': 0, 'link_uuid_m1': UUID('69e0f404-68bd-5319-b104-86cd294fb5a7'), 'endpoint_uuid_m1': UUID('2c1222e6-915e-51a6-b1da-35ede9fcf6e9'), 'position_m1': 1}]
+(Background on this error at: https://sqlalche.me/e/14/gkpj)"
+	debug_error_string = "UNKNOWN:Error received from peer  {grpc_status:13, grpc_message:"(psycopg2.errors.ForeignKeyViolation) insert on table \"link_endpoint\" violates foreign key constraint \"link_endpoint_endpoint_uuid_fkey\"\nDETAIL:  Key (endpoint_uuid)=(\'a52a2fad-8488-5747-9f40-47bedb92533e\') is not present in table \"endpoint\".\n\n[SQL: INSERT INTO link_endpoint (link_uuid, endpoint_uuid, position) VALUES (%(link_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(link_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (link_uuid, endpoint_uuid) DO NOTHING]\n[parameters: {\'link_uuid_m0\': UUID(\'69e0f404-68bd-5319-b104-86cd294fb5a7\'), \'endpoint_uuid_m0\': UUID(\'a52a2fad-8488-5747-9f40-47bedb92533e\'), \'position_m0\': 0, \'link_uuid_m1\': UUID(\'69e0f404-68bd-5319-b104-86cd294fb5a7\'), \'endpoint_uuid_m1\': UUID(\'2c1222e6-915e-51a6-b1da-35ede9fcf6e9\'), \'position_m1\': 1}]\n(Background on this error at: https://sqlalche.me/e/14/gkpj)"}"
+>
+Error link PE1/2/4==PE4/2/1: <_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.INTERNAL
+	details = "(psycopg2.errors.ForeignKeyViolation) insert on table "link_endpoint" violates foreign key constraint "link_endpoint_endpoint_uuid_fkey"
+DETAIL:  Key (endpoint_uuid)=('f0b5de5b-aac4-5c71-b03b-7737218fb8d1') is not present in table "endpoint".
+
+[SQL: INSERT INTO link_endpoint (link_uuid, endpoint_uuid, position) VALUES (%(link_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(link_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (link_uuid, endpoint_uuid) DO NOTHING]
+[parameters: {'link_uuid_m0': UUID('73e3f8ef-9223-54f3-bb75-d68ce7e6398e'), 'endpoint_uuid_m0': UUID('f0b5de5b-aac4-5c71-b03b-7737218fb8d1'), 'position_m0': 0, 'link_uuid_m1': UUID('73e3f8ef-9223-54f3-bb75-d68ce7e6398e'), 'endpoint_uuid_m1': UUID('186ed572-23f9-562a-880c-f61b0cd8fd24'), 'position_m1': 1}]
+(Background on this error at: https://sqlalche.me/e/14/gkpj)"
+	debug_error_string = "UNKNOWN:Error received from peer  {grpc_status:13, grpc_message:"(psycopg2.errors.ForeignKeyViolation) insert on table \"link_endpoint\" violates foreign key constraint \"link_endpoint_endpoint_uuid_fkey\"\nDETAIL:  Key (endpoint_uuid)=(\'f0b5de5b-aac4-5c71-b03b-7737218fb8d1\') is not present in table \"endpoint\".\n\n[SQL: INSERT INTO link_endpoint (link_uuid, endpoint_uuid, position) VALUES (%(link_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(link_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (link_uuid, endpoint_uuid) DO NOTHING]\n[parameters: {\'link_uuid_m0\': UUID(\'73e3f8ef-9223-54f3-bb75-d68ce7e6398e\'), \'endpoint_uuid_m0\': UUID(\'f0b5de5b-aac4-5c71-b03b-7737218fb8d1\'), \'position_m0\': 0, \'link_uuid_m1\': UUID(\'73e3f8ef-9223-54f3-bb75-d68ce7e6398e\'), \'endpoint_uuid_m1\': UUID(\'186ed572-23f9-562a-880c-f61b0cd8fd24\'), \'position_m1\': 1}]\n(Background on this error at: https://sqlalche.me/e/14/gkpj)"}"
+>
+Error link PE2/2/3==PE3/2/2: <_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.INTERNAL
+	details = "(psycopg2.errors.ForeignKeyViolation) insert on table "link_endpoint" violates foreign key constraint "link_endpoint_endpoint_uuid_fkey"
+DETAIL:  Key (endpoint_uuid)=('4d5433e6-b1f9-51d3-94d4-971bff7841b6') is not present in table "endpoint".
+
+[SQL: INSERT INTO link_endpoint (link_uuid, endpoint_uuid, position) VALUES (%(link_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(link_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (link_uuid, endpoint_uuid) DO NOTHING]
+[parameters: {'link_uuid_m0': UUID('7354dbb9-512f-53e2-8fff-6179501c2ffa'), 'endpoint_uuid_m0': UUID('4d5433e6-b1f9-51d3-94d4-971bff7841b6'), 'position_m0': 0, 'link_uuid_m1': UUID('7354dbb9-512f-53e2-8fff-6179501c2ffa'), 'endpoint_uuid_m1': UUID('b7c9cade-93d3-5a10-934b-aa142c979a67'), 'position_m1': 1}]
+(Background on this error at: https://sqlalche.me/e/14/gkpj)"
+	debug_error_string = "UNKNOWN:Error received from peer  {grpc_status:13, grpc_message:"(psycopg2.errors.ForeignKeyViolation) insert on table \"link_endpoint\" violates foreign key constraint \"link_endpoint_endpoint_uuid_fkey\"\nDETAIL:  Key (endpoint_uuid)=(\'4d5433e6-b1f9-51d3-94d4-971bff7841b6\') is not present in table \"endpoint\".\n\n[SQL: INSERT INTO link_endpoint (link_uuid, endpoint_uuid, position) VALUES (%(link_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(link_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (link_uuid, endpoint_uuid) DO NOTHING]\n[parameters: {\'link_uuid_m0\': UUID(\'7354dbb9-512f-53e2-8fff-6179501c2ffa\'), \'endpoint_uuid_m0\': UUID(\'4d5433e6-b1f9-51d3-94d4-971bff7841b6\'), \'position_m0\': 0, \'link_uuid_m1\': UUID(\'7354dbb9-512f-53e2-8fff-6179501c2ffa\'), \'endpoint_uuid_m1\': UUID(\'b7c9cade-93d3-5a10-934b-aa142c979a67\'), \'position_m1\': 1}]\n(Background on this error at: https://sqlalche.me/e/14/gkpj)"}"
+>
+Error link PE2/2/4==PE4/2/2: <_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.INTERNAL
+	details = "(psycopg2.errors.ForeignKeyViolation) insert on table "link_endpoint" violates foreign key constraint "link_endpoint_endpoint_uuid_fkey"
+DETAIL:  Key (endpoint_uuid)=('b283c70f-3ba2-5d64-9557-5a4a856c97a7') is not present in table "endpoint".
+
+[SQL: INSERT INTO link_endpoint (link_uuid, endpoint_uuid, position) VALUES (%(link_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(link_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (link_uuid, endpoint_uuid) DO NOTHING]
+[parameters: {'link_uuid_m0': UUID('45c21bc1-7cc5-5986-b9a1-f690403dd84c'), 'endpoint_uuid_m0': UUID('b283c70f-3ba2-5d64-9557-5a4a856c97a7'), 'position_m0': 0, 'link_uuid_m1': UUID('45c21bc1-7cc5-5986-b9a1-f690403dd84c'), 'endpoint_uuid_m1': UUID('d7fd7d3a-f825-54a5-9f92-49d238ddc264'), 'position_m1': 1}]
+(Background on this error at: https://sqlalche.me/e/14/gkpj)"
+	debug_error_string = "UNKNOWN:Error received from peer  {grpc_status:13, grpc_message:"(psycopg2.errors.ForeignKeyViolation) insert on table \"link_endpoint\" violates foreign key constraint \"link_endpoint_endpoint_uuid_fkey\"\nDETAIL:  Key (endpoint_uuid)=(\'b283c70f-3ba2-5d64-9557-5a4a856c97a7\') is not present in table \"endpoint\".\n\n[SQL: INSERT INTO link_endpoint (link_uuid, endpoint_uuid, position) VALUES (%(link_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(link_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (link_uuid, endpoint_uuid) DO NOTHING]\n[parameters: {\'link_uuid_m0\': UUID(\'45c21bc1-7cc5-5986-b9a1-f690403dd84c\'), \'endpoint_uuid_m0\': UUID(\'b283c70f-3ba2-5d64-9557-5a4a856c97a7\'), \'position_m0\': 0, \'link_uuid_m1\': UUID(\'45c21bc1-7cc5-5986-b9a1-f690403dd84c\'), \'endpoint_uuid_m1\': UUID(\'d7fd7d3a-f825-54a5-9f92-49d238ddc264\'), \'position_m1\': 1}]\n(Background on this error at: https://sqlalche.me/e/14/gkpj)"}"
+>
+Error link PE3/2/1==PE1/2/3: <_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.INTERNAL
+	details = "(psycopg2.errors.ForeignKeyViolation) insert on table "link_endpoint" violates foreign key constraint "link_endpoint_endpoint_uuid_fkey"
+DETAIL:  Key (endpoint_uuid)=('a52a2fad-8488-5747-9f40-47bedb92533e') is not present in table "endpoint".
+
+[SQL: INSERT INTO link_endpoint (link_uuid, endpoint_uuid, position) VALUES (%(link_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(link_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (link_uuid, endpoint_uuid) DO NOTHING]
+[parameters: {'link_uuid_m0': UUID('e91f66c7-a4db-5c59-a2bc-e477ea427beb'), 'endpoint_uuid_m0': UUID('2c1222e6-915e-51a6-b1da-35ede9fcf6e9'), 'position_m0': 0, 'link_uuid_m1': UUID('e91f66c7-a4db-5c59-a2bc-e477ea427beb'), 'endpoint_uuid_m1': UUID('a52a2fad-8488-5747-9f40-47bedb92533e'), 'position_m1': 1}]
+(Background on this error at: https://sqlalche.me/e/14/gkpj)"
+	debug_error_string = "UNKNOWN:Error received from peer  {grpc_status:13, grpc_message:"(psycopg2.errors.ForeignKeyViolation) insert on table \"link_endpoint\" violates foreign key constraint \"link_endpoint_endpoint_uuid_fkey\"\nDETAIL:  Key (endpoint_uuid)=(\'a52a2fad-8488-5747-9f40-47bedb92533e\') is not present in table \"endpoint\".\n\n[SQL: INSERT INTO link_endpoint (link_uuid, endpoint_uuid, position) VALUES (%(link_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(link_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (link_uuid, endpoint_uuid) DO NOTHING]\n[parameters: {\'link_uuid_m0\': UUID(\'e91f66c7-a4db-5c59-a2bc-e477ea427beb\'), \'endpoint_uuid_m0\': UUID(\'2c1222e6-915e-51a6-b1da-35ede9fcf6e9\'), \'position_m0\': 0, \'link_uuid_m1\': UUID(\'e91f66c7-a4db-5c59-a2bc-e477ea427beb\'), \'endpoint_uuid_m1\': UUID(\'a52a2fad-8488-5747-9f40-47bedb92533e\'), \'position_m1\': 1}]\n(Background on this error at: https://sqlalche.me/e/14/gkpj)"}"
+>
+Error link PE3/2/2==PE2/2/3: <_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.INTERNAL
+	details = "(psycopg2.errors.ForeignKeyViolation) insert on table "link_endpoint" violates foreign key constraint "link_endpoint_endpoint_uuid_fkey"
+DETAIL:  Key (endpoint_uuid)=('4d5433e6-b1f9-51d3-94d4-971bff7841b6') is not present in table "endpoint".
+
+[SQL: INSERT INTO link_endpoint (link_uuid, endpoint_uuid, position) VALUES (%(link_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(link_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (link_uuid, endpoint_uuid) DO NOTHING]
+[parameters: {'link_uuid_m0': UUID('068ac2c0-b639-5ac0-a452-904d6bc7e07f'), 'endpoint_uuid_m0': UUID('b7c9cade-93d3-5a10-934b-aa142c979a67'), 'position_m0': 0, 'link_uuid_m1': UUID('068ac2c0-b639-5ac0-a452-904d6bc7e07f'), 'endpoint_uuid_m1': UUID('4d5433e6-b1f9-51d3-94d4-971bff7841b6'), 'position_m1': 1}]
+(Background on this error at: https://sqlalche.me/e/14/gkpj)"
+	debug_error_string = "UNKNOWN:Error received from peer  {grpc_status:13, grpc_message:"(psycopg2.errors.ForeignKeyViolation) insert on table \"link_endpoint\" violates foreign key constraint \"link_endpoint_endpoint_uuid_fkey\"\nDETAIL:  Key (endpoint_uuid)=(\'4d5433e6-b1f9-51d3-94d4-971bff7841b6\') is not present in table \"endpoint\".\n\n[SQL: INSERT INTO link_endpoint (link_uuid, endpoint_uuid, position) VALUES (%(link_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(link_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (link_uuid, endpoint_uuid) DO NOTHING]\n[parameters: {\'link_uuid_m0\': UUID(\'068ac2c0-b639-5ac0-a452-904d6bc7e07f\'), \'endpoint_uuid_m0\': UUID(\'b7c9cade-93d3-5a10-934b-aa142c979a67\'), \'position_m0\': 0, \'link_uuid_m1\': UUID(\'068ac2c0-b639-5ac0-a452-904d6bc7e07f\'), \'endpoint_uuid_m1\': UUID(\'4d5433e6-b1f9-51d3-94d4-971bff7841b6\'), \'position_m1\': 1}]\n(Background on this error at: https://sqlalche.me/e/14/gkpj)"}"
+>
+Error link PE4/2/2==PE2/2/4: <_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.INTERNAL
+	details = "(psycopg2.errors.ForeignKeyViolation) insert on table "link_endpoint" violates foreign key constraint "link_endpoint_endpoint_uuid_fkey"
+DETAIL:  Key (endpoint_uuid)=('b283c70f-3ba2-5d64-9557-5a4a856c97a7') is not present in table "endpoint".
+
+[SQL: INSERT INTO link_endpoint (link_uuid, endpoint_uuid, position) VALUES (%(link_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(link_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (link_uuid, endpoint_uuid) DO NOTHING]
+[parameters: {'link_uuid_m0': UUID('a09116a4-06eb-550a-910d-3f04f7891fa8'), 'endpoint_uuid_m0': UUID('d7fd7d3a-f825-54a5-9f92-49d238ddc264'), 'position_m0': 0, 'link_uuid_m1': UUID('a09116a4-06eb-550a-910d-3f04f7891fa8'), 'endpoint_uuid_m1': UUID('b283c70f-3ba2-5d64-9557-5a4a856c97a7'), 'position_m1': 1}]
+(Background on this error at: https://sqlalche.me/e/14/gkpj)"
+	debug_error_string = "UNKNOWN:Error received from peer  {grpc_status:13, grpc_message:"(psycopg2.errors.ForeignKeyViolation) insert on table \"link_endpoint\" violates foreign key constraint \"link_endpoint_endpoint_uuid_fkey\"\nDETAIL:  Key (endpoint_uuid)=(\'b283c70f-3ba2-5d64-9557-5a4a856c97a7\') is not present in table \"endpoint\".\n\n[SQL: INSERT INTO link_endpoint (link_uuid, endpoint_uuid, position) VALUES (%(link_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(link_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (link_uuid, endpoint_uuid) DO NOTHING]\n[parameters: {\'link_uuid_m0\': UUID(\'a09116a4-06eb-550a-910d-3f04f7891fa8\'), \'endpoint_uuid_m0\': UUID(\'d7fd7d3a-f825-54a5-9f92-49d238ddc264\'), \'position_m0\': 0, \'link_uuid_m1\': UUID(\'a09116a4-06eb-550a-910d-3f04f7891fa8\'), \'endpoint_uuid_m1\': UUID(\'b283c70f-3ba2-5d64-9557-5a4a856c97a7\'), \'position_m1\': 1}]\n(Background on this error at: https://sqlalche.me/e/14/gkpj)"}"
+>
+Error link PE4/2/1==PE1/2/4: <_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.INTERNAL
+	details = "(psycopg2.errors.ForeignKeyViolation) insert on table "link_endpoint" violates foreign key constraint "link_endpoint_endpoint_uuid_fkey"
+DETAIL:  Key (endpoint_uuid)=('f0b5de5b-aac4-5c71-b03b-7737218fb8d1') is not present in table "endpoint".
+
+[SQL: INSERT INTO link_endpoint (link_uuid, endpoint_uuid, position) VALUES (%(link_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(link_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (link_uuid, endpoint_uuid) DO NOTHING]
+[parameters: {'link_uuid_m0': UUID('f8c34143-a9fa-5150-b68b-9471dd7597cf'), 'endpoint_uuid_m0': UUID('186ed572-23f9-562a-880c-f61b0cd8fd24'), 'position_m0': 0, 'link_uuid_m1': UUID('f8c34143-a9fa-5150-b68b-9471dd7597cf'), 'endpoint_uuid_m1': UUID('f0b5de5b-aac4-5c71-b03b-7737218fb8d1'), 'position_m1': 1}]
+(Background on this error at: https://sqlalche.me/e/14/gkpj)"
+	debug_error_string = "UNKNOWN:Error received from peer  {grpc_status:13, grpc_message:"(psycopg2.errors.ForeignKeyViolation) insert on table \"link_endpoint\" violates foreign key constraint \"link_endpoint_endpoint_uuid_fkey\"\nDETAIL:  Key (endpoint_uuid)=(\'f0b5de5b-aac4-5c71-b03b-7737218fb8d1\') is not present in table \"endpoint\".\n\n[SQL: INSERT INTO link_endpoint (link_uuid, endpoint_uuid, position) VALUES (%(link_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(link_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (link_uuid, endpoint_uuid) DO NOTHING]\n[parameters: {\'link_uuid_m0\': UUID(\'f8c34143-a9fa-5150-b68b-9471dd7597cf\'), \'endpoint_uuid_m0\': UUID(\'186ed572-23f9-562a-880c-f61b0cd8fd24\'), \'position_m0\': 0, \'link_uuid_m1\': UUID(\'f8c34143-a9fa-5150-b68b-9471dd7597cf\'), \'endpoint_uuid_m1\': UUID(\'f0b5de5b-aac4-5c71-b03b-7737218fb8d1\'), \'position_m1\': 1}]\n(Background on this error at: https://sqlalche.me/e/14/gkpj)"}"
+>
+Error link PE4/2/2==PE2/2/4: <_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.INTERNAL
+	details = "(psycopg2.errors.ForeignKeyViolation) insert on table "link_endpoint" violates foreign key constraint "link_endpoint_endpoint_uuid_fkey"
+DETAIL:  Key (endpoint_uuid)=('b283c70f-3ba2-5d64-9557-5a4a856c97a7') is not present in table "endpoint".
+
+[SQL: INSERT INTO link_endpoint (link_uuid, endpoint_uuid, position) VALUES (%(link_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(link_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (link_uuid, endpoint_uuid) DO NOTHING]
+[parameters: {'link_uuid_m0': UUID('a09116a4-06eb-550a-910d-3f04f7891fa8'), 'endpoint_uuid_m0': UUID('d7fd7d3a-f825-54a5-9f92-49d238ddc264'), 'position_m0': 0, 'link_uuid_m1': UUID('a09116a4-06eb-550a-910d-3f04f7891fa8'), 'endpoint_uuid_m1': UUID('b283c70f-3ba2-5d64-9557-5a4a856c97a7'), 'position_m1': 1}]
+(Background on this error at: https://sqlalche.me/e/14/gkpj)"
+	debug_error_string = "UNKNOWN:Error received from peer  {grpc_status:13, grpc_message:"(psycopg2.errors.ForeignKeyViolation) insert on table \"link_endpoint\" violates foreign key constraint \"link_endpoint_endpoint_uuid_fkey\"\nDETAIL:  Key (endpoint_uuid)=(\'b283c70f-3ba2-5d64-9557-5a4a856c97a7\') is not present in table \"endpoint\".\n\n[SQL: INSERT INTO link_endpoint (link_uuid, endpoint_uuid, position) VALUES (%(link_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(link_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (link_uuid, endpoint_uuid) DO NOTHING]\n[parameters: {\'link_uuid_m0\': UUID(\'a09116a4-06eb-550a-910d-3f04f7891fa8\'), \'endpoint_uuid_m0\': UUID(\'d7fd7d3a-f825-54a5-9f92-49d238ddc264\'), \'position_m0\': 0, \'link_uuid_m1\': UUID(\'a09116a4-06eb-550a-910d-3f04f7891fa8\'), \'endpoint_uuid_m1\': UUID(\'b283c70f-3ba2-5d64-9557-5a4a856c97a7\'), \'position_m1\': 1}]\n(Background on this error at: https://sqlalche.me/e/14/gkpj)"}"
+>
+Error link PE4/2/3==PE3/2/4: <_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.INTERNAL
+	details = "(psycopg2.errors.ForeignKeyViolation) insert on table "link_endpoint" violates foreign key constraint "link_endpoint_endpoint_uuid_fkey"
+DETAIL:  Key (endpoint_uuid)=('1be4ef68-1eaa-5cef-946a-62547daecff7') is not present in table "endpoint".
+
+[SQL: INSERT INTO link_endpoint (link_uuid, endpoint_uuid, position) VALUES (%(link_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(link_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (link_uuid, endpoint_uuid) DO NOTHING]
+[parameters: {'link_uuid_m0': UUID('e1dfbd4e-f086-51be-9900-6afc1d7a3a78'), 'endpoint_uuid_m0': UUID('1be4ef68-1eaa-5cef-946a-62547daecff7'), 'position_m0': 0, 'link_uuid_m1': UUID('e1dfbd4e-f086-51be-9900-6afc1d7a3a78'), 'endpoint_uuid_m1': UUID('2a187b9b-17c3-5bdb-806a-4423a6dfbb5d'), 'position_m1': 1}]
+(Background on this error at: https://sqlalche.me/e/14/gkpj)"
+	debug_error_string = "UNKNOWN:Error received from peer  {grpc_status:13, grpc_message:"(psycopg2.errors.ForeignKeyViolation) insert on table \"link_endpoint\" violates foreign key constraint \"link_endpoint_endpoint_uuid_fkey\"\nDETAIL:  Key (endpoint_uuid)=(\'1be4ef68-1eaa-5cef-946a-62547daecff7\') is not present in table \"endpoint\".\n\n[SQL: INSERT INTO link_endpoint (link_uuid, endpoint_uuid, position) VALUES (%(link_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(link_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (link_uuid, endpoint_uuid) DO NOTHING]\n[parameters: {\'link_uuid_m0\': UUID(\'e1dfbd4e-f086-51be-9900-6afc1d7a3a78\'), \'endpoint_uuid_m0\': UUID(\'1be4ef68-1eaa-5cef-946a-62547daecff7\'), \'position_m0\': 0, \'link_uuid_m1\': UUID(\'e1dfbd4e-f086-51be-9900-6afc1d7a3a78\'), \'endpoint_uuid_m1\': UUID(\'2a187b9b-17c3-5bdb-806a-4423a6dfbb5d\'), \'position_m1\': 1}]\n(Background on this error at: https://sqlalche.me/e/14/gkpj)"}"
+>
+Error link r1/Ethernet2==r2/Ethernet1: <_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.INTERNAL
+	details = "(psycopg2.errors.ForeignKeyViolation) insert on table "link_endpoint" violates foreign key constraint "link_endpoint_endpoint_uuid_fkey"
+DETAIL:  Key (endpoint_uuid)=('d929dddf-c566-5954-a9f1-b6b11a7d4860') is not present in table "endpoint".
+
+[SQL: INSERT INTO link_endpoint (link_uuid, endpoint_uuid, position) VALUES (%(link_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(link_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (link_uuid, endpoint_uuid) DO NOTHING]
+[parameters: {'link_uuid_m0': UUID('fd087e8d-014f-53f1-9c5d-2b8cea097be6'), 'endpoint_uuid_m0': UUID('d929dddf-c566-5954-a9f1-b6b11a7d4860'), 'position_m0': 0, 'link_uuid_m1': UUID('fd087e8d-014f-53f1-9c5d-2b8cea097be6'), 'endpoint_uuid_m1': UUID('5c8e311d-51b0-5e6e-883c-80f3b2c05f08'), 'position_m1': 1}]
+(Background on this error at: https://sqlalche.me/e/14/gkpj)"
+	debug_error_string = "UNKNOWN:Error received from peer  {grpc_status:13, grpc_message:"(psycopg2.errors.ForeignKeyViolation) insert on table \"link_endpoint\" violates foreign key constraint \"link_endpoint_endpoint_uuid_fkey\"\nDETAIL:  Key (endpoint_uuid)=(\'d929dddf-c566-5954-a9f1-b6b11a7d4860\') is not present in table \"endpoint\".\n\n[SQL: INSERT INTO link_endpoint (link_uuid, endpoint_uuid, position) VALUES (%(link_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(link_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (link_uuid, endpoint_uuid) DO NOTHING]\n[parameters: {\'link_uuid_m0\': UUID(\'fd087e8d-014f-53f1-9c5d-2b8cea097be6\'), \'endpoint_uuid_m0\': UUID(\'d929dddf-c566-5954-a9f1-b6b11a7d4860\'), \'position_m0\': 0, \'link_uuid_m1\': UUID(\'fd087e8d-014f-53f1-9c5d-2b8cea097be6\'), \'endpoint_uuid_m1\': UUID(\'5c8e311d-51b0-5e6e-883c-80f3b2c05f08\'), \'position_m1\': 1}]\n(Background on this error at: https://sqlalche.me/e/14/gkpj)"}"
+>
+Error link r2/Ethernet1==r1/Ethernet2: <_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.INTERNAL
+	details = "(psycopg2.errors.ForeignKeyViolation) insert on table "link_endpoint" violates foreign key constraint "link_endpoint_endpoint_uuid_fkey"
+DETAIL:  Key (endpoint_uuid)=('5c8e311d-51b0-5e6e-883c-80f3b2c05f08') is not present in table "endpoint".
+
+[SQL: INSERT INTO link_endpoint (link_uuid, endpoint_uuid, position) VALUES (%(link_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(link_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (link_uuid, endpoint_uuid) DO NOTHING]
+[parameters: {'link_uuid_m0': UUID('8f168bd9-b519-5167-a330-f7590337816d'), 'endpoint_uuid_m0': UUID('5c8e311d-51b0-5e6e-883c-80f3b2c05f08'), 'position_m0': 0, 'link_uuid_m1': UUID('8f168bd9-b519-5167-a330-f7590337816d'), 'endpoint_uuid_m1': UUID('d929dddf-c566-5954-a9f1-b6b11a7d4860'), 'position_m1': 1}]
+(Background on this error at: https://sqlalche.me/e/14/gkpj)"
+	debug_error_string = "UNKNOWN:Error received from peer  {grpc_status:13, grpc_message:"(psycopg2.errors.ForeignKeyViolation) insert on table \"link_endpoint\" violates foreign key constraint \"link_endpoint_endpoint_uuid_fkey\"\nDETAIL:  Key (endpoint_uuid)=(\'5c8e311d-51b0-5e6e-883c-80f3b2c05f08\') is not present in table \"endpoint\".\n\n[SQL: INSERT INTO link_endpoint (link_uuid, endpoint_uuid, position) VALUES (%(link_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(link_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (link_uuid, endpoint_uuid) DO NOTHING]\n[parameters: {\'link_uuid_m0\': UUID(\'8f168bd9-b519-5167-a330-f7590337816d\'), \'endpoint_uuid_m0\': UUID(\'5c8e311d-51b0-5e6e-883c-80f3b2c05f08\'), \'position_m0\': 0, \'link_uuid_m1\': UUID(\'8f168bd9-b519-5167-a330-f7590337816d\'), \'endpoint_uuid_m1\': UUID(\'d929dddf-c566-5954-a9f1-b6b11a7d4860\'), \'position_m1\': 1}]\n(Background on this error at: https://sqlalche.me/e/14/gkpj)"}"
+>
+Error link r1/Ethernet10==core-net/eth1: <_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.INTERNAL
+	details = "(psycopg2.errors.ForeignKeyViolation) insert on table "link_endpoint" violates foreign key constraint "link_endpoint_endpoint_uuid_fkey"
+DETAIL:  Key (endpoint_uuid)=('612c9f80-7d0f-5761-a9a6-4345c311959c') is not present in table "endpoint".
+
+[SQL: INSERT INTO link_endpoint (link_uuid, endpoint_uuid, position) VALUES (%(link_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(link_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (link_uuid, endpoint_uuid) DO NOTHING]
+[parameters: {'link_uuid_m0': UUID('039dd0e7-8e20-550b-a411-1d28db8a4e25'), 'endpoint_uuid_m0': UUID('612c9f80-7d0f-5761-a9a6-4345c311959c'), 'position_m0': 0, 'link_uuid_m1': UUID('039dd0e7-8e20-550b-a411-1d28db8a4e25'), 'endpoint_uuid_m1': UUID('ec481b62-0cbe-5366-b851-fa4f3fff1ccc'), 'position_m1': 1}]
+(Background on this error at: https://sqlalche.me/e/14/gkpj)"
+	debug_error_string = "UNKNOWN:Error received from peer  {grpc_status:13, grpc_message:"(psycopg2.errors.ForeignKeyViolation) insert on table \"link_endpoint\" violates foreign key constraint \"link_endpoint_endpoint_uuid_fkey\"\nDETAIL:  Key (endpoint_uuid)=(\'612c9f80-7d0f-5761-a9a6-4345c311959c\') is not present in table \"endpoint\".\n\n[SQL: INSERT INTO link_endpoint (link_uuid, endpoint_uuid, position) VALUES (%(link_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(link_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (link_uuid, endpoint_uuid) DO NOTHING]\n[parameters: {\'link_uuid_m0\': UUID(\'039dd0e7-8e20-550b-a411-1d28db8a4e25\'), \'endpoint_uuid_m0\': UUID(\'612c9f80-7d0f-5761-a9a6-4345c311959c\'), \'position_m0\': 0, \'link_uuid_m1\': UUID(\'039dd0e7-8e20-550b-a411-1d28db8a4e25\'), \'endpoint_uuid_m1\': UUID(\'ec481b62-0cbe-5366-b851-fa4f3fff1ccc\'), \'position_m1\': 1}]\n(Background on this error at: https://sqlalche.me/e/14/gkpj)"}"
+>
+Error link core-net/eth1==r1/Ethernet10: <_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.INTERNAL
+	details = "(psycopg2.errors.ForeignKeyViolation) insert on table "link_endpoint" violates foreign key constraint "link_endpoint_endpoint_uuid_fkey"
+DETAIL:  Key (endpoint_uuid)=('ec481b62-0cbe-5366-b851-fa4f3fff1ccc') is not present in table "endpoint".
+
+[SQL: INSERT INTO link_endpoint (link_uuid, endpoint_uuid, position) VALUES (%(link_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(link_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (link_uuid, endpoint_uuid) DO NOTHING]
+[parameters: {'link_uuid_m0': UUID('d67af9c0-528a-5308-b719-1dc1a8042104'), 'endpoint_uuid_m0': UUID('ec481b62-0cbe-5366-b851-fa4f3fff1ccc'), 'position_m0': 0, 'link_uuid_m1': UUID('d67af9c0-528a-5308-b719-1dc1a8042104'), 'endpoint_uuid_m1': UUID('612c9f80-7d0f-5761-a9a6-4345c311959c'), 'position_m1': 1}]
+(Background on this error at: https://sqlalche.me/e/14/gkpj)"
+	debug_error_string = "UNKNOWN:Error received from peer  {grpc_status:13, grpc_message:"(psycopg2.errors.ForeignKeyViolation) insert on table \"link_endpoint\" violates foreign key constraint \"link_endpoint_endpoint_uuid_fkey\"\nDETAIL:  Key (endpoint_uuid)=(\'ec481b62-0cbe-5366-b851-fa4f3fff1ccc\') is not present in table \"endpoint\".\n\n[SQL: INSERT INTO link_endpoint (link_uuid, endpoint_uuid, position) VALUES (%(link_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(link_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (link_uuid, endpoint_uuid) DO NOTHING]\n[parameters: {\'link_uuid_m0\': UUID(\'d67af9c0-528a-5308-b719-1dc1a8042104\'), \'endpoint_uuid_m0\': UUID(\'ec481b62-0cbe-5366-b851-fa4f3fff1ccc\'), \'position_m0\': 0, \'link_uuid_m1\': UUID(\'d67af9c0-528a-5308-b719-1dc1a8042104\'), \'endpoint_uuid_m1\': UUID(\'612c9f80-7d0f-5761-a9a6-4345c311959c\'), \'position_m1\': 1}]\n(Background on this error at: https://sqlalche.me/e/14/gkpj)"}"
+>
+Error link r2/Ethernet10==edge-net/eth1: <_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.INTERNAL
+	details = "(psycopg2.errors.ForeignKeyViolation) insert on table "link_endpoint" violates foreign key constraint "link_endpoint_endpoint_uuid_fkey"
+DETAIL:  Key (endpoint_uuid)=('62b0e019-8669-536e-9aed-400399f0c579') is not present in table "endpoint".
+
+[SQL: INSERT INTO link_endpoint (link_uuid, endpoint_uuid, position) VALUES (%(link_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(link_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (link_uuid, endpoint_uuid) DO NOTHING]
+[parameters: {'link_uuid_m0': UUID('74c6873c-bbd0-5a1d-b141-6a91bb4de203'), 'endpoint_uuid_m0': UUID('62b0e019-8669-536e-9aed-400399f0c579'), 'position_m0': 0, 'link_uuid_m1': UUID('74c6873c-bbd0-5a1d-b141-6a91bb4de203'), 'endpoint_uuid_m1': UUID('bcba339b-06a7-5f7f-9efa-7585422a8986'), 'position_m1': 1}]
+(Background on this error at: https://sqlalche.me/e/14/gkpj)"
+	debug_error_string = "UNKNOWN:Error received from peer  {grpc_status:13, grpc_message:"(psycopg2.errors.ForeignKeyViolation) insert on table \"link_endpoint\" violates foreign key constraint \"link_endpoint_endpoint_uuid_fkey\"\nDETAIL:  Key (endpoint_uuid)=(\'62b0e019-8669-536e-9aed-400399f0c579\') is not present in table \"endpoint\".\n\n[SQL: INSERT INTO link_endpoint (link_uuid, endpoint_uuid, position) VALUES (%(link_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(link_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (link_uuid, endpoint_uuid) DO NOTHING]\n[parameters: {\'link_uuid_m0\': UUID(\'74c6873c-bbd0-5a1d-b141-6a91bb4de203\'), \'endpoint_uuid_m0\': UUID(\'62b0e019-8669-536e-9aed-400399f0c579\'), \'position_m0\': 0, \'link_uuid_m1\': UUID(\'74c6873c-bbd0-5a1d-b141-6a91bb4de203\'), \'endpoint_uuid_m1\': UUID(\'bcba339b-06a7-5f7f-9efa-7585422a8986\'), \'position_m1\': 1}]\n(Background on this error at: https://sqlalche.me/e/14/gkpj)"}"
+>
+Error link edge-net/eth1==r2/Ethernet10: <_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.INTERNAL
+	details = "(psycopg2.errors.ForeignKeyViolation) insert on table "link_endpoint" violates foreign key constraint "link_endpoint_endpoint_uuid_fkey"
+DETAIL:  Key (endpoint_uuid)=('bcba339b-06a7-5f7f-9efa-7585422a8986') is not present in table "endpoint".
+
+[SQL: INSERT INTO link_endpoint (link_uuid, endpoint_uuid, position) VALUES (%(link_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(link_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (link_uuid, endpoint_uuid) DO NOTHING]
+[parameters: {'link_uuid_m0': UUID('f23628e9-be75-5a6a-b2e8-47024efc31f8'), 'endpoint_uuid_m0': UUID('bcba339b-06a7-5f7f-9efa-7585422a8986'), 'position_m0': 0, 'link_uuid_m1': UUID('f23628e9-be75-5a6a-b2e8-47024efc31f8'), 'endpoint_uuid_m1': UUID('62b0e019-8669-536e-9aed-400399f0c579'), 'position_m1': 1}]
+(Background on this error at: https://sqlalche.me/e/14/gkpj)"
+	debug_error_string = "UNKNOWN:Error received from peer  {grpc_status:13, grpc_message:"(psycopg2.errors.ForeignKeyViolation) insert on table \"link_endpoint\" violates foreign key constraint \"link_endpoint_endpoint_uuid_fkey\"\nDETAIL:  Key (endpoint_uuid)=(\'bcba339b-06a7-5f7f-9efa-7585422a8986\') is not present in table \"endpoint\".\n\n[SQL: INSERT INTO link_endpoint (link_uuid, endpoint_uuid, position) VALUES (%(link_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(link_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (link_uuid, endpoint_uuid) DO NOTHING]\n[parameters: {\'link_uuid_m0\': UUID(\'f23628e9-be75-5a6a-b2e8-47024efc31f8\'), \'endpoint_uuid_m0\': UUID(\'bcba339b-06a7-5f7f-9efa-7585422a8986\'), \'position_m0\': 0, \'link_uuid_m1\': UUID(\'f23628e9-be75-5a6a-b2e8-47024efc31f8\'), \'endpoint_uuid_m1\': UUID(\'62b0e019-8669-536e-9aed-400399f0c579\'), \'position_m1\': 1}]\n(Background on this error at: https://sqlalche.me/e/14/gkpj)"}"
+>
+Injecting services...
+Error service core-to-edge-l2svc: <_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.INTERNAL
+	details = "(psycopg2.errors.ForeignKeyViolation) insert on table "service_endpoint" violates foreign key constraint "service_endpoint_endpoint_uuid_fkey"
+DETAIL:  Key (endpoint_uuid)=('6f384b93-c965-56a4-be0d-55bdcb192ba1') is not present in table "endpoint".
+
+[SQL: INSERT INTO service_endpoint (service_uuid, endpoint_uuid, position) VALUES (%(service_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(service_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (service_uuid, endpoint_uuid) DO NOTHING]
+[parameters: {'service_uuid_m0': UUID('9e2a26a0-a509-577b-8b30-e4c30c39446d'), 'endpoint_uuid_m0': UUID('6f384b93-c965-56a4-be0d-55bdcb192ba1'), 'position_m0': 0, 'service_uuid_m1': UUID('9e2a26a0-a509-577b-8b30-e4c30c39446d'), 'endpoint_uuid_m1': UUID('16047808-2b90-5d98-859a-e3c05ec77fd5'), 'position_m1': 1}]
+(Background on this error at: https://sqlalche.me/e/14/gkpj)"
+	debug_error_string = "UNKNOWN:Error received from peer  {grpc_status:13, grpc_message:"(psycopg2.errors.ForeignKeyViolation) insert on table \"service_endpoint\" violates foreign key constraint \"service_endpoint_endpoint_uuid_fkey\"\nDETAIL:  Key (endpoint_uuid)=(\'6f384b93-c965-56a4-be0d-55bdcb192ba1\') is not present in table \"endpoint\".\n\n[SQL: INSERT INTO service_endpoint (service_uuid, endpoint_uuid, position) VALUES (%(service_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(service_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (service_uuid, endpoint_uuid) DO NOTHING]\n[parameters: {\'service_uuid_m0\': UUID(\'9e2a26a0-a509-577b-8b30-e4c30c39446d\'), \'endpoint_uuid_m0\': UUID(\'6f384b93-c965-56a4-be0d-55bdcb192ba1\'), \'position_m0\': 0, \'service_uuid_m1\': UUID(\'9e2a26a0-a509-577b-8b30-e4c30c39446d\'), \'endpoint_uuid_m1\': UUID(\'16047808-2b90-5d98-859a-e3c05ec77fd5\'), \'position_m1\': 1}]\n(Background on this error at: https://sqlalche.me/e/14/gkpj)"}"
+>
+Error service dc-2-dc-svc: <_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.INTERNAL
+	details = "(psycopg2.errors.ForeignKeyViolation) insert on table "service_endpoint" violates foreign key constraint "service_endpoint_endpoint_uuid_fkey"
+DETAIL:  Key (endpoint_uuid)=('37ab67ef-0064-54e3-ae9b-d40100953834') is not present in table "endpoint".
+
+[SQL: INSERT INTO service_endpoint (service_uuid, endpoint_uuid, position) VALUES (%(service_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(service_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (service_uuid, endpoint_uuid) DO NOTHING]
+[parameters: {'service_uuid_m0': UUID('1470911c-01c5-51ee-8d58-e53a6890d261'), 'endpoint_uuid_m0': UUID('37ab67ef-0064-54e3-ae9b-d40100953834'), 'position_m0': 0, 'service_uuid_m1': UUID('1470911c-01c5-51ee-8d58-e53a6890d261'), 'endpoint_uuid_m1': UUID('97f57787-cfec-5315-9718-7e850905f11a'), 'position_m1': 1}]
+(Background on this error at: https://sqlalche.me/e/14/gkpj)"
+	debug_error_string = "UNKNOWN:Error received from peer  {grpc_status:13, grpc_message:"(psycopg2.errors.ForeignKeyViolation) insert on table \"service_endpoint\" violates foreign key constraint \"service_endpoint_endpoint_uuid_fkey\"\nDETAIL:  Key (endpoint_uuid)=(\'37ab67ef-0064-54e3-ae9b-d40100953834\') is not present in table \"endpoint\".\n\n[SQL: INSERT INTO service_endpoint (service_uuid, endpoint_uuid, position) VALUES (%(service_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(service_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (service_uuid, endpoint_uuid) DO NOTHING]\n[parameters: {\'service_uuid_m0\': UUID(\'1470911c-01c5-51ee-8d58-e53a6890d261\'), \'endpoint_uuid_m0\': UUID(\'37ab67ef-0064-54e3-ae9b-d40100953834\'), \'position_m0\': 0, \'service_uuid_m1\': UUID(\'1470911c-01c5-51ee-8d58-e53a6890d261\'), \'endpoint_uuid_m1\': UUID(\'97f57787-cfec-5315-9718-7e850905f11a\'), \'position_m1\': 1}]\n(Background on this error at: https://sqlalche.me/e/14/gkpj)"}"
+>
+Injecting slices...
+Error slice idc-slice: <_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.INTERNAL
+	details = "(psycopg2.errors.ForeignKeyViolation) insert on table "slice_endpoint" violates foreign key constraint "slice_endpoint_endpoint_uuid_fkey"
+DETAIL:  Key (endpoint_uuid)=('37ab67ef-0064-54e3-ae9b-d40100953834') is not present in table "endpoint".
+
+[SQL: INSERT INTO slice_endpoint (slice_uuid, endpoint_uuid, position) VALUES (%(slice_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(slice_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (slice_uuid, endpoint_uuid) DO NOTHING]
+[parameters: {'slice_uuid_m0': UUID('4ef67032-8fde-54c7-9128-27b9d864cd0e'), 'endpoint_uuid_m0': UUID('37ab67ef-0064-54e3-ae9b-d40100953834'), 'position_m0': 0, 'slice_uuid_m1': UUID('4ef67032-8fde-54c7-9128-27b9d864cd0e'), 'endpoint_uuid_m1': UUID('97f57787-cfec-5315-9718-7e850905f11a'), 'position_m1': 1}]
+(Background on this error at: https://sqlalche.me/e/14/gkpj)"
+	debug_error_string = "UNKNOWN:Error received from peer  {grpc_status:13, grpc_message:"(psycopg2.errors.ForeignKeyViolation) insert on table \"slice_endpoint\" violates foreign key constraint \"slice_endpoint_endpoint_uuid_fkey\"\nDETAIL:  Key (endpoint_uuid)=(\'37ab67ef-0064-54e3-ae9b-d40100953834\') is not present in table \"endpoint\".\n\n[SQL: INSERT INTO slice_endpoint (slice_uuid, endpoint_uuid, position) VALUES (%(slice_uuid_m0)s, %(endpoint_uuid_m0)s, %(position_m0)s), (%(slice_uuid_m1)s, %(endpoint_uuid_m1)s, %(position_m1)s) ON CONFLICT (slice_uuid, endpoint_uuid) DO NOTHING]\n[parameters: {\'slice_uuid_m0\': UUID(\'4ef67032-8fde-54c7-9128-27b9d864cd0e\'), \'endpoint_uuid_m0\': UUID(\'37ab67ef-0064-54e3-ae9b-d40100953834\'), \'position_m0\': 0, \'slice_uuid_m1\': UUID(\'4ef67032-8fde-54c7-9128-27b9d864cd0e\'), \'endpoint_uuid_m1\': UUID(\'97f57787-cfec-5315-9718-7e850905f11a\'), \'position_m1\': 1}]\n(Background on this error at: https://sqlalche.me/e/14/gkpj)"}"
+>
+Restoration complete.

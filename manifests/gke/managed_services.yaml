@@ -1,0 +1,149 @@
+# Copyright 2022-2025 ETSI SDG TeraFlowSDN (TFS) (https://tfs.etsi.org/)
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: managed-services
+spec:
+  selector:
+    matchLabels:
+      app: managed-services
+  template:
+    metadata:
+      labels:
+        app: managed-services
+    spec:
+      terminationGracePeriodSeconds: 5
+      nodeSelector:
+        kubernetes.io/os: linux
+        kubernetes.io/arch: amd64
+      containers:
+        - name: service-server
+          image: us-central1-docker.pkg.dev/xg-ai-controller-77/xg-ai-images/serviceservice:v1-amd64
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3030
+            - containerPort: 9192
+          env:
+            - name: LOG_LEVEL
+              value: "INFO"
+            - name: METRICS_PORT
+              value: "9192"
+            # Explicitly point to localhost for pathcomp since they are in the same pod
+            - name: PATHCOMPSERVICE_SERVICE_HOST
+              value: "127.0.0.1"
+            - name: PATHCOMPSERVICE_SERVICE_PORT_GRPC
+              value: "10020"
+          envFrom:
+            - secretRef:
+                name: crdb-data
+            - secretRef:
+                name: nats-data
+          resources:
+            requests:
+              cpu: 10m
+              memory: 64Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+        - name: pathcomp-frontend
+          image: us-central1-docker.pkg.dev/xg-ai-controller-77/xg-ai-images/pathcomp-frontend:v1-amd64
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 10020
+            - containerPort: 9193 # Offset from 9192 to avoid conflict with serviceservice
+          env:
+            - name: LOG_LEVEL
+              value: "INFO"
+            - name: ENABLE_FORECASTER
+              value: "NO"
+            - name: METRICS_PORT
+              value: "9193"
+          resources:
+            requests:
+              cpu: 10m
+              memory: 64Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+        - name: pathcomp-backend
+          image: us-central1-docker.pkg.dev/xg-ai-controller-77/xg-ai-images/pathcomp-backend:v1-amd64
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8081
+          resources:
+            requests:
+              cpu: 10m
+              memory: 64Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+        - name: slice-server
+          image: us-central1-docker.pkg.dev/xg-ai-controller-77/xg-ai-images/sliceservice:v1-amd64
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 4040
+            - containerPort: 9194
+          env:
+            - name: LOG_LEVEL
+              value: "INFO"
+            - name: METRICS_PORT
+              value: "9194"
+          resources:
+            requests:
+              cpu: 10m
+              memory: 64Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: serviceservice
+spec:
+  selector:
+    app: managed-services
+  ports:
+    - name: grpc
+      port: 3030
+      targetPort: 3030
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pathcompservice
+spec:
+  selector:
+    app: managed-services
+  ports:
+    - name: grpc
+      port: 10020
+      targetPort: 10020
+    - name: http
+      port: 8081
+      targetPort: 8081
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sliceservice
+spec:
+  selector:
+    app: managed-services
+  ports:
+    - name: grpc
+      port: 4040
+      targetPort: 4040

@@ -687,7 +687,7 @@
                         "action": 1,
                         "custom": {
                             "resource_key": "_connect/address",
-                            "resource_value": "10.0.2.10"
+                            "resource_value": "127.0.0.1"
                         }
                     },
                     {
@@ -730,7 +730,7 @@
                         "action": 1,
                         "custom": {
                             "resource_key": "_connect/address",
-                            "resource_value": "10.0.2.10"
+                            "resource_value": "127.0.0.1"
                         }
                     },
                     {
@@ -777,7 +777,7 @@
                         "action": 1,
                         "custom": {
                             "resource_key": "_connect/address",
-                            "resource_value": "cttc-ols.cttc-ols.svc.cluster.local"
+                            "resource_value": "127.0.0.1"
                         }
                     },
                     {
@@ -817,7 +817,7 @@
                         "action": 1,
                         "custom": {
                             "resource_key": "_connect/address",
-                            "resource_value": "10.0.2.10"
+                            "resource_value": "127.0.0.1"
                         }
                     },
                     {

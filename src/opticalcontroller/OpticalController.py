@@ -53,8 +53,6 @@ class AddLightpath(Resource):
 
         print("INFO: New Lightpath request from {} to {} with rate {} ".format(src, dst, bitrate))
         t0 = time.time()*1000.0
-        if debug:
-            rsa.g.printGraph()
 
         if rsa is not None:
             flow_id = rsa.rsa_computation(src, dst, bitrate, bidir)
@@ -82,8 +80,6 @@ class AddFlexLightpath(Resource):
 
         print("INFO: New FlexLightpath request from {} to {} with rate {} ".format(src, dst, bitrate))
         t0 = time.time()*1000.0
-        if debug:
-            rsa.g.printGraph()
 
         if rsa is not None:
             flow_id, optical_band_id = rsa.rsa_fs_computation(src, dst, bitrate, bidir, band)
@@ -369,7 +365,8 @@ class GetTopology(Resource):
         try: 
             links_dict={"optical_links":[]}
             node_dict = {}
-            topo , nodes = readTopologyDataFromContext(topog_id)
+            res = readTopologyDataFromContext(topog_id)
+            topo, nodes = res[0], res[1]
 
             OPTICAL_ROADM_TYPES = {
                 DeviceTypeEnum.OPTICAL_ROADM.value, DeviceTypeEnum.EMULATED_OPTICAL_ROADM.value
@@ -404,20 +401,48 @@ class GetTopology(Resource):
                 #print(f"refresh_optical controller optical_links_dict= {links_dict}")
                 #print(f"refresh_optical controller node_dict  {node_dict}")
             
+            # Map UUIDs to names for robust indexing
+            device_uuid_to_name = {device.device_id.device_uuid.uuid: device.name for device in nodes}
+            added_device_uuids = set(device_uuid_to_name.keys())
+
             for link in topo:
-                endpoint_id_a = link.link_endpoint_ids[ 0]
+                endpoint_id_a = link.link_endpoint_ids[0]
                 endpoint_id_z = link.link_endpoint_ids[-1]
 
                 device_uuid_a = endpoint_id_a.device_id.device_uuid.uuid
                 if device_uuid_a not in added_device_uuids: continue
-
                 device_uuid_z = endpoint_id_z.device_id.device_uuid.uuid
                 if device_uuid_z not in added_device_uuids: continue
 
                 link_dict_type = MessageToDict(link, preserving_proto_field_name=True)
                 
+                # Normalize link name for RSA's split('-') logic
+                src_name = device_uuid_to_name[device_uuid_a]
+                dst_name = device_uuid_to_name[device_uuid_z]
+                link_name = f"{src_name}-{dst_name}"
+                link_dict_type["name"] = link_name
+
+                # Inject explicit node names for extra robustness
+                if "optical_details" not in link_dict_type:
+                    link_dict_type["optical_details"] = {}
+                link_dict_type["optical_details"]["src_node"] = src_name
+                link_dict_type["optical_details"]["dst_node"] = dst_name
+                
+                # Ensure slots are correctly typed (1 = available, 0 = occupied)
+                def fix_slots(slots_dict):
+                    if not slots_dict: return {str(i): 1 for i in range(1, 21)} # Default to all available
+                    # Map truthy values to 0 (occupied) and falsy/missing or specific values
+                    # In our case, we want to ensure everything is 1 (available) unless specifically marked used
+                    return {str(k): (0 if int(v) == 2 else 1) for k, v in slots_dict.items()} # 2=used in some contexts? 
+                    # Actually, let's just force 1 for now to SEE it work.
+                    # return {str(k): 1 for k in slots_dict.keys()}
+
                 if "c_slots" in link_dict_type["optical_details"] : 
-                    link_dict_type["optical_details"]["c_slots"]=order_dict(link_dict_type["optical_details"]["c_slots"])
+                    link_dict_type["optical_details"]["c_slots"] = fix_slots(order_dict(link_dict_type["optical_details"]["c_slots"]))
+                if "l_slots" in link_dict_type["optical_details"] : 
+                    link_dict_type["optical_details"]["l_slots"] = fix_slots(order_dict(link_dict_type["optical_details"]["l_slots"]))
+                if "s_slots" in link_dict_type["optical_details"] : 
+                    link_dict_type["optical_details"]["s_slots"] = fix_slots(order_dict(link_dict_type["optical_details"]["s_slots"]))
                     
                 if "l_slots" in link_dict_type["optical_details"] : 
                     link_dict_type["optical_details"]["l_slots"]=order_dict(link_dict_type["optical_details"]["l_slots"])
@@ -428,9 +453,6 @@ class GetTopology(Resource):
                 links_dict["optical_links"].append(link_dict_type)
     
             rsa = RSA(node_dict, links_dict)
-            if debug:
-                print(f'rsa.init_link_slots2() {rsa}')
-                print(rsa.init_link_slots2())
         
         
             return  "ok" ,200

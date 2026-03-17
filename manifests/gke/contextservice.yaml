@@ -13,9 +13,12 @@ spec:
         app: contextservice
     spec:
       terminationGracePeriodSeconds: 5
+      nodeSelector:
+        kubernetes.io/os: linux
+        kubernetes.io/arch: amd64
       containers:
         - name: server
-          image: us-central1-docker.pkg.dev/xg-ai-controller-77/xg-ai-images/contextservice:v1
+          image: us-central1-docker.pkg.dev/xg-ai-controller-77/xg-ai-images/contextservice:v1-amd64
           imagePullPolicy: Always
           ports:
             - containerPort: 1010
@@ -27,6 +30,13 @@ spec:
               value: "FALSE"
             - name: ALLOW_EXPLICIT_ADD_LINK_TO_TOPOLOGY
               value: "FALSE"
+            - name: CRDB_DATABASE
+              value: "tfs_context"
+          envFrom:
+            - secretRef:
+                name: crdb-data
+            - secretRef:
+                name: nats-data
           # GKE Autopilot handles probes automatically, but we keep them for logic
           readinessProbe:
             grpc:
@@ -36,8 +46,8 @@ spec:
               port: 1010
           resources:
             requests:
-              cpu: 250m
-              memory: 128Mi
+              cpu: 10m
+              memory: 64Mi
             limits:
               cpu: 1000m
               memory: 1024Mi

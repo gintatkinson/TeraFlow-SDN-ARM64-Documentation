@@ -13,9 +13,12 @@ spec:
         app: forecasterservice
     spec:
       terminationGracePeriodSeconds: 5
+      nodeSelector:
+        kubernetes.io/os: linux
+        kubernetes.io/arch: amd64
       containers:
         - name: server
-          image: us-central1-docker.pkg.dev/xg-ai-controller-77/xg-ai-images/forecasterservice:v1
+          image: us-central1-docker.pkg.dev/xg-ai-controller-77/xg-ai-images/forecasterservice:v1-amd64
           imagePullPolicy: Always
           ports:
             - containerPort: 1010
@@ -25,8 +28,8 @@ spec:
               value: "INFO"
           resources:
             requests:
-              cpu: 250m
-              memory: 128Mi
+              cpu: 10m
+              memory: 64Mi
             limits:
               cpu: 1000m
               memory: 1024Mi

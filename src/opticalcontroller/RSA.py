@@ -19,8 +19,6 @@ from opticalcontroller.variables import *
 
 LOGGER = logging.getLogger(__name__)
 
-def print(*args) -> None:
-    LOGGER.info(' '.join([str(a) for a in args]))
 
 class RSA():
     def __init__(self, nodes, links):
@@ -36,6 +34,17 @@ class RSA():
         self.l_slot_number = 0
         self.s_slot_number = 0
         self.optical_bands = {}
+
+    def get_link_nodes(self, link_name):
+        parts = link_name.split('-')
+        for i in range(1, len(parts)):
+            s = "-".join(parts[:i])
+            d = "-".join(parts[i:])
+            if s in self.nodes_dict and d in self.nodes_dict:
+                return [s, d]
+        # Fallback for unexpected formats
+        if len(parts) >= 2: return [parts[0], parts[-1]]
+        return [link_name, link_name]
        
         
     def init_link_slots(self, testing):
@@ -88,21 +97,25 @@ class RSA():
             break
         return "{},{},{}".format(self.c_slot_number, self.l_slot_number, self.s_slot_number)
 
+    def reverse_link(self, link):
+        parts = link.split('-')
+        for i in range(1, len(parts)):
+            s, d = "-".join(parts[:i]), "-".join(parts[i:])
+            if s in self.nodes_dict and d in self.nodes_dict:
+                return f"{d}-{s}"
+        return "-".join(parts[::-1]) # fallback
+
     def initGraph(self):
         self.g = Graph()
         for n in self.nodes_dict:
             self.g.add_vertex(n)
         for l in self.links_dict["optical_links"]:
-            if debug:
-                print(l)
-            [s, d] = l["optical_link"]["name"].split('-')
+            [s, d] = self.get_link_nodes(l["optical_link"]["name"])
             ps = l["optical_link"]["details"]["source"]
             pd = l["optical_link"]["details"]["target"]
             self.g.add_edge(s, d, ps, pd, 1)
 
         print("INFO: Graph initiated.")
-        if debug:
-            self.g.printGraph()
 
     def initGraph2(self):
      
@@ -111,16 +124,18 @@ class RSA():
         for n in self.nodes_dict:
             self.g.add_vertex(n)
         for l in self.links_dict["optical_links"]:
-            if debug:
-                print(l)
-            [s, d] = l["name"].split('-')
+            # Try to use explicit node names injected by GetTopology first
+            s = l.get("optical_details", {}).get("src_node")
+            d = l.get("optical_details", {}).get("dst_node")
+            
+            if s is None or d is None:
+                [s, d] = self.get_link_nodes(l["name"])
+            
             ps = l["optical_details"]["src_port"]
             pd = l["optical_details"]["dst_port"]
             self.g.add_edge(s, d, ps, pd, 1)
 
         print("INFO: Graph initiated.2")
-        if debug:
-            self.g.printGraph()
 
     def compute_path(self, src, dst):
         path = shortest_path(self.g, self.g.get_vertex(src), self.g.get_vertex(dst))
@@ -162,8 +177,8 @@ class RSA():
         s_slots = {}
         add = ""
         drop = ""
-        src_1, dst_1 = links[0].split('-')
-        src_2, dst_2 = links[-1].split('-')
+        [src_1, dst_1] = self.get_link_nodes(links[0])
+        [src_2, dst_2] = self.get_link_nodes(links[-1])
         if self.nodes_dict[src_1]["type"] == "OC-TP":
             add = links[0]
         if self.nodes_dict[dst_2]["type"] == "OC-TP":
@@ -345,8 +360,6 @@ class RSA():
 
 
         for l in links:
-            if debug:
-                print(l)
             #link = self.links_dict[l]
             #f = fiber_f[l]
             #fib = link['fibers'][f]
@@ -368,7 +381,7 @@ class RSA():
             #self.restore_optical_band_2(o_b_id, slots, band,links)
         if bidir:
             for l in links:
-                r_l = reverse_link(l)
+                r_l = self.reverse_link(l)
                 if debug:
                     print(f"reverse_link {r_l}")
                 rlink = self.get_link_by_name(r_l)
@@ -453,7 +466,7 @@ class RSA():
             #self.restore_optical_band_2(o_b_id, slots, band,links)
             if bidir:
                 for l in links:
-                    r_l = reverse_link(l)
+                    r_l = self.reverse_link(l)
                     if debug:
                         print(r_l)
                     rlink = self.get_link_by_name(r_l)
@@ -556,7 +569,8 @@ class RSA():
             if debug:
                 print(l, s_port, d_port)
 
-            r_l = reverse_link(l)
+            nodes = self.get_link_nodes(l)
+            r_l = f"{nodes[1]}-{nodes[0]}"
             r_link = self.get_link_by_name(r_l)
             if debug:
                 print(r_l)
@@ -606,7 +620,7 @@ class RSA():
             
             fibx = self.get_fiber_details(lx, f)
             '''
-            src, dst = llx.split("-")
+            src, dst = self.get_link_nodes(llx)
             #outport = self.links_dict[lx]['fibers'][f]["src_port"]
             lx = self.get_link_by_name(llx)["optical_details"]
             outport = lx["src_port"]
@@ -673,7 +687,7 @@ class RSA():
         t_flows = {}
 
         #flows_add_side
-        src, dst = add.split("-")
+        src, dst = self.get_link_nodes(add)
         lx = self.get_link_by_name(add)["optical_details"]
         #outport = self.links_dict[add]['fibers'][f]["src_port"]
         outport = lx["src_port"]
@@ -709,7 +723,7 @@ class RSA():
         #flows_drop_side
         # R2 rules
         ly = self.get_link_by_name(drop)["optical_details"]
-        src, dst = drop.split("-")
+        src, dst = self.get_link_nodes(drop)
         #outport = self.links_dict[drop]['fibers'][f]["src_port"]
         outport = ly["src_port"]
 
@@ -796,6 +810,8 @@ class RSA():
             self.db_flows[self.flow_id]["band"] = band
             self.db_flows[self.flow_id]["freq"] = f0
             self.db_flows[self.flow_id]["is_active"] = True
+        else:
+            self.null_values(self.flow_id)
         return self.flow_id
 
     def null_values(self, flow_id):
@@ -1022,8 +1038,9 @@ class RSA():
                 temp_links2.append(list(dst_links.keys())[0])
 
             if len(temp_links2) == 2:
-                [t_src, roadm_src] = temp_links2[0].split('-')
-                [roadm_dst, t_dst] = temp_links2[1].split('-')
+                [t_src, roadm_src] = self.get_link_nodes(temp_links2[0])
+
+                [roadm_dst, t_dst] = self.get_link_nodes(temp_links2[1])
                 temp_path.append(t_src)
                 temp_path.append(roadm_src)
                 temp_path.append(roadm_dst)

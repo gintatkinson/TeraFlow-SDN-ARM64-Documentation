@@ -121,6 +121,9 @@ def create_app(use_config=None, web_app_root=None):
     from webui.service.policy_rule.routes import policy_rule        # pylint: disable=import-outside-toplevel
     app.register_blueprint(policy_rule)
 
+    from webui.service.grafana_routes import grafana                # pylint: disable=import-outside-toplevel
+    app.register_blueprint(grafana)
+
     app.jinja_env.globals.update({              # pylint: disable=no-member
         'enumerate'           : enumerate,
         'grpc_message_to_json': grpc_message_to_json,

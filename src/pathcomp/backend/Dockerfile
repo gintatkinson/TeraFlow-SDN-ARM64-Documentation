@@ -15,7 +15,7 @@
 # Multi-stage Docker image build
 
 # Stage 1
-FROM ubuntu:20.04 AS builder
+FROM --platform=linux/amd64 ubuntu:20.04 AS builder
 ARG DEBIAN_FRONTEND=noninteractive
 
 # Install build software
@@ -53,7 +53,7 @@ ENTRYPOINT [ "./pathComp-cvr", "config/pathcomp.conf", "screen_only" ]
 
 
 # Stage 2
-FROM ubuntu:20.04 AS release
+FROM --platform=linux/amd64 ubuntu:20.04 AS release
 ARG DEBIAN_FRONTEND=noninteractive
 
 # Install build software

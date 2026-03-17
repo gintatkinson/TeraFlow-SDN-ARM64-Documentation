@@ -1,0 +1,33 @@
+
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '--platform', 'linux/amd64', '-t', 'us-central1-docker.pkg.dev/xg-ai-controller-77/xg-ai-images/contextservice:v1-amd64', '-f', 'src/context/Dockerfile', '.']
+  id: 'context'
+  waitFor: ['-']
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '--platform', 'linux/amd64', '-t', 'us-central1-docker.pkg.dev/xg-ai-controller-77/xg-ai-images/webuiservice:v1-amd64', '-f', 'src/webui/Dockerfile', '.']
+  id: 'webui'
+  waitFor: ['-']
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '--platform', 'linux/amd64', '-t', 'us-central1-docker.pkg.dev/xg-ai-controller-77/xg-ai-images/forecasterservice:v1-amd64', '-f', 'src/forecaster/Dockerfile', '.']
+  id: 'forecaster'
+  waitFor: ['-']
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '--platform', 'linux/amd64', '-t', 'us-central1-docker.pkg.dev/xg-ai-controller-77/xg-ai-images/l3-centralizedattackdetectorservice:v1-amd64', '-f', 'src/l3_centralizedattackdetector/Dockerfile', '.']
+  id: 'l3-cad'
+  waitFor: ['-']
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '--platform', 'linux/amd64', '-t', 'us-central1-docker.pkg.dev/xg-ai-controller-77/xg-ai-images/deviceservice:v1-amd64', '-f', 'src/device/Dockerfile', '.']
+  id: 'device'
+  waitFor: ['-']
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '--platform', 'linux/amd64', '-t', 'us-central1-docker.pkg.dev/xg-ai-controller-77/xg-ai-images/serviceservice:v1-amd64', '-f', 'src/service/Dockerfile', '.']
+  id: 'service'
+  waitFor: ['-']
+images:
+- 'us-central1-docker.pkg.dev/xg-ai-controller-77/xg-ai-images/contextservice:v1-amd64'
+- 'us-central1-docker.pkg.dev/xg-ai-controller-77/xg-ai-images/webuiservice:v1-amd64'
+- 'us-central1-docker.pkg.dev/xg-ai-controller-77/xg-ai-images/forecasterservice:v1-amd64'
+- 'us-central1-docker.pkg.dev/xg-ai-controller-77/xg-ai-images/l3-centralizedattackdetectorservice:v1-amd64'
+- 'us-central1-docker.pkg.dev/xg-ai-controller-77/xg-ai-images/deviceservice:v1-amd64'
+- 'us-central1-docker.pkg.dev/xg-ai-controller-77/xg-ai-images/serviceservice:v1-amd64'

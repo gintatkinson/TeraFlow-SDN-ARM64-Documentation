@@ -13,9 +13,12 @@ spec:
         app: l3-centralizedattackdetectorservice
     spec:
       terminationGracePeriodSeconds: 5
+      nodeSelector:
+        kubernetes.io/os: linux
+        kubernetes.io/arch: amd64
       containers:
         - name: server
-          image: us-central1-docker.pkg.dev/xg-ai-controller-77/xg-ai-images/l3_centralizedattackdetectorservice:v1
+          image: us-central1-docker.pkg.dev/xg-ai-controller-77/xg-ai-images/l3-centralizedattackdetectorservice:v1-amd64
           imagePullPolicy: Always
           ports:
             - containerPort: 10001
@@ -33,7 +36,7 @@ spec:
               value: "0"
           resources:
             requests:
-              cpu: 25m
+              cpu: 10m
               memory: 128Mi
             limits:
               cpu: 100m

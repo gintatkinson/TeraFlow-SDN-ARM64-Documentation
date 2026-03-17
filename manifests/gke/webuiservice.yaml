@@ -29,9 +29,12 @@ spec:
         fsGroup: 472
         supplementalGroups:
           - 0
+      nodeSelector:
+        kubernetes.io/os: linux
+        kubernetes.io/arch: amd64
       containers:
         - name: server
-          image: us-central1-docker.pkg.dev/xg-ai-controller-77/xg-ai-images/webuiservice:v1
+          image: us-central1-docker.pkg.dev/xg-ai-controller-77/xg-ai-images/webuiservice:v1-amd64
           imagePullPolicy: Always
           ports:
             - containerPort: 8004
@@ -39,7 +42,17 @@ spec:
             - name: LOG_LEVEL
               value: "INFO"
             - name: WEBUISERVICE_SERVICE_BASEURL_HTTP
-              value: "/webui/"
+              value: ""
+            - name: OPTICALCONTROLLER_SERVICE_HOST
+              value: "opticalcontrollerservice"
+            - name: OPTICALCONTROLLER_SERVICE_PORT_GRPC
+              value: "10060"
+            - name: OPTICALCONTROLLER_SERVICE_BASEURL_HTTP
+              value: "/OpticalTFS"
+            - name: QKD_APP_SERVICE_HOST
+              value: "qkd-appservice"
+            - name: QKD_APP_SERVICE_PORT_GRPC
+              value: "10070"
           readinessProbe:
             httpGet:
               path: /healthz/ready
@@ -54,8 +67,8 @@ spec:
             timeoutSeconds: 1
           resources:
             requests:
-              cpu: 50m
-              memory: 128Mi
+              cpu: 10m
+              memory: 64Mi
             limits:
               cpu: 1000m
               memory: 1024Mi
@@ -91,8 +104,8 @@ spec:
             timeoutSeconds: 1
           resources:
             requests:
-              cpu: 250m
-              memory: 512Mi
+              cpu: 10m
+              memory: 128Mi
             limits:
               cpu: 500m
               memory: 1024Mi

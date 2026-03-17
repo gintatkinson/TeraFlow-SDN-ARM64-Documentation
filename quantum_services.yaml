@@ -1,0 +1,87 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: opticalcontrollerservice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: opticalcontrollerservice
+  template:
+    metadata:
+      labels:
+        app: opticalcontrollerservice
+    spec:
+      terminationGracePeriodSeconds: 5
+      containers:
+      - name: server
+        image: labs.etsi.org:5050/tfs/controller/opticalcontroller:latest
+        imagePullPolicy: Always
+        env:
+        - name: LOG_LEVEL
+          value: INFO
+        ports:
+        - containerPort: 10060
+        resources:
+          requests:
+            cpu: 10m
+            memory: 64Mi
+          limits:
+            cpu: 500m
+            memory: 512Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: opticalcontrollerservice
+spec:
+  selector:
+    app: opticalcontrollerservice
+  ports:
+  - name: grpc
+    port: 10060
+    targetPort: 10060
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: qkd-appservice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: qkd-appservice
+  template:
+    metadata:
+      labels:
+        app: qkd-appservice
+    spec:
+      terminationGracePeriodSeconds: 5
+      containers:
+      - name: server
+        image: labs.etsi.org:5050/tfs/controller/qkd_app:latest
+        imagePullPolicy: Always
+        env:
+        - name: LOG_LEVEL
+          value: INFO
+        ports:
+        - containerPort: 10070
+        resources:
+          requests:
+            cpu: 10m
+            memory: 64Mi
+          limits:
+            cpu: 500m
+            memory: 512Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: qkd-appservice
+spec:
+  selector:
+    app: qkd-appservice
+  ports:
+  - name: grpc
+    port: 10070
+    targetPort: 10070

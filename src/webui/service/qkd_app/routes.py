@@ -16,7 +16,7 @@ import grpc
 import logging
 from flask import current_app, render_template, Blueprint, flash, session, redirect, url_for
 from common.proto.qkd_app_pb2 import App, AppId, QKDAppStatusEnum, QKDAppTypesEnum
-from common.proto.context_pb2 import Uuid, ContextId
+from common.proto.context_pb2 import Uuid, ContextId, Empty
 from common.tools.context_queries.Context import get_context
 from common.tools.context_queries.Device import get_device
 from context.client.ContextClient import ContextClient
@@ -74,6 +74,19 @@ def home():
                         device = get_device(context_client, app.remote_device_id.device_uuid.uuid)
                         if device:
                             device_names[app.remote_device_id.device_uuid.uuid] = device.name
+            
+            # Fetch QKD Nodes and Links
+            qkd_nodes = []
+            devices = context_client.ListDevices(Empty()).devices
+            for d in devices:
+                if d.device_type == 'qkd-node' or 'QKD' in d.name:
+                    qkd_nodes.append(d)
+            
+            qkd_links = []
+            links = context_client.ListLinks(Empty()).links
+            for l in links:
+                if 'QKD' in l.name:
+                    qkd_links.append(l)
     finally:
         context_client.close()
 
@@ -81,6 +94,8 @@ def home():
     return render_template(
         'qkd_app/home.html', 
         apps=apps, 
+        qkd_nodes=qkd_nodes,
+        qkd_links=qkd_links,
         device_names=device_names, 
         ate=QKDAppTypesEnum, 
         ase=QKDAppStatusEnum

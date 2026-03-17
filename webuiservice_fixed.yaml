@@ -1,0 +1,72 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webuiservice
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: webuiservice
+  template:
+    metadata:
+      labels:
+        app: webuiservice
+    spec:
+      terminationGracePeriodSeconds: 5
+      nodeSelector:
+        kubernetes.io/arch: amd64
+      containers:
+      - name: server
+        image: us-central1-docker.pkg.dev/xg-ai-controller-77/xg-ai-images/webuiservice:v1-amd64
+        env:
+        - name: LOG_LEVEL
+          value: INFO
+        - name: CONTEXTSERVICE_SERVICE_HOST
+          value: "contextservice"
+        - name: CONTEXTSERVICE_SERVICE_PORT_GRPC
+          value: "1010"
+        - name: DEVICESERVICE_SERVICE_HOST
+          value: "deviceservice"
+        - name: DEVICESERVICE_SERVICE_PORT_GRPC
+          value: "2020"
+        - name: SERVICESERVICE_SERVICE_HOST
+          value: "serviceservice"
+        - name: SERVICESERVICE_SERVICE_PORT_GRPC
+          value: "3030"
+        - name: SLICESERVICE_SERVICE_HOST
+          value: "sliceservice"
+        - name: SLICESERVICE_SERVICE_PORT_GRPC
+          value: "4040"
+        ports:
+        - containerPort: 8004
+        resources:
+          requests:
+            cpu: 10m
+            memory: 64Mi
+          limits:
+            cpu: 200m
+            memory: 256Mi
+      - name: grafana
+        image: grafana/grafana:8.5.22
+        env:
+        - name: GF_SERVER_ROOT_URL
+          value: http://0.0.0.0:3000/grafana/
+        - name: GF_SERVER_SERVE_FROM_SUB_PATH
+          value: "true"
+        ports:
+        - containerPort: 3000
+        resources:
+          requests:
+            cpu: 10m
+            memory: 128Mi
+          limits:
+            cpu: 200m
+            memory: 256Mi
+        volumeMounts:
+        - mountPath: /var/lib/grafana
+          name: grafana-pv
+      volumes:
+      - name: grafana-pv
+        emptyDir: {}

@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-FROM python:3.9-slim
+FROM --platform=linux/amd64 python:3.9-slim
 
 # Install dependencies
 RUN apt-get --yes --quiet --quiet update && \
