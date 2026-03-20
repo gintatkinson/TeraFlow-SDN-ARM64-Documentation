@@ -11,7 +11,8 @@
     --text-primary: #3c4043;
     --text-secondary: #5f6368;
     --gcp-blue: #1a73e8;
-    --navbar-bg: #1a73e8;
+    --navbar-bg: #ffffff;
+    --navbar-text: #3c4043;
     --alert-red: #d93025;
     --success-green: #1e8e3e;
     --sidebar-width: 240px;
@@ -27,7 +28,8 @@
         --text-primary: #e8eaed;
         --text-secondary: #9aa0a6;
         --gcp-blue: #8ab4f8;
-        --navbar-bg: #1a73e8; /* Keep blue for consistency or change to #202124 */
+        --navbar-bg: #202124;
+        --navbar-text: #e8eaed;
         --alert-red: #f28b82;
         --success-green: #81c995;
     }
@@ -49,13 +51,13 @@ body {
     border-radius: 3px;
 }
 
-/* Navbar Tuning - GCP Blue Header */
+/* Navbar Tuning - Authentic Google Header */
 .navbar {
     height: var(--navbar-height);
-    background-color: #1a73e8 !important; /* GCP Brand Blue */
-    border-bottom: 1px solid rgba(0,0,0,0.1);
+    background-color: var(--navbar-bg) !important;
+    border-bottom: 1px solid var(--border-color);
     z-index: 1030;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: none; /* Google uses borders, not shadows for the main header */
 }
 
 .navbar-logo {
@@ -63,11 +65,11 @@ body {
 }
 
 .navbar-brand span {
-    color: white !important;
+    color: var(--text-primary) !important;
 }
 
 .context-indicator {
-    background-color: var(--bg-base) !important;
+    background-color: var(--bg-surface) !important;
     border: 1px solid var(--border-color);
     color: var(--text-secondary);
 }
