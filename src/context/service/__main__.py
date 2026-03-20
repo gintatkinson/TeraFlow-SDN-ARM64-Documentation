@@ -19,7 +19,8 @@ from common.message_broker.Factory import get_messagebroker_backend
 from common.message_broker.MessageBroker import MessageBroker
 from .ContextService import ContextService
 from .database.Engine import Engine
-from .database.models._Base import rebuild_database
+from .database import models
+from .database.models import rebuild_database
 
 LOG_LEVEL = get_log_level()
 logging.basicConfig(level=LOG_LEVEL, format="[%(asctime)s] %(levelname)s:%(name)s:%(message)s")

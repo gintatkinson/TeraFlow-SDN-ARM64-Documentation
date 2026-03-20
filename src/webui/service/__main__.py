@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import hashlib, sys, logging
+import hashlib, sys, logging, os
 from prometheus_client import start_http_server
 from common.Constants import ServiceNameEnum
 from common.Settings import (
@@ -47,13 +47,15 @@ def main():
     logger.info('Starting...')
 
     metrics_port = get_metrics_port()
-    start_http_server(metrics_port)
+    debug = get_setting('DEBUG', default=DEBUG)
+    if isinstance(debug, str): debug = (debug.upper() in {'T', '1', 'TRUE'})
+
+    if not debug or os.environ.get('WERKZEUG_RUN_MAIN') == 'true':
+        start_http_server(metrics_port)
 
     host = get_setting('HOST', default=HOST)
     service_port = get_service_port_http(ServiceNameEnum.WEBUI)
     web_app_root = get_service_baseurl_http(ServiceNameEnum.WEBUI)
-    debug = get_setting('DEBUG', default=DEBUG)
-    if isinstance(debug, str): debug = (debug.upper() in {'T', '1', 'TRUE'})
 
     app = create_app(use_config={
         'SECRET_KEY'          : SECRET_KEY,

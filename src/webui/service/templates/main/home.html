@@ -1,112 +1,188 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="row mb-4">
-    <div class="col-12">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item active" aria-current="page">Home</li>
-            </ol>
-        </nav>
-        <h2 class="fw-light">Dashboard</h2>
-        <p class="text-muted">Welcome to the xG-AI Cognitive Controller. Manage your contexts, topologies, and descriptors below.</p>
-    </div>
-</div>
-
 <div class="row">
-    <div class="col-lg-6 mb-4">
-        <div class="card h-100 border-0 shadow-sm">
-            <div class="card-header bg-white py-3 border-0">
-                <h5 class="card-title mb-0 d-flex align-items-center">
-                    <i class="bi bi-folder2-open me-2 text-primary"></i>
-                    Working Context
-                </h5>
+    <!-- Main Content Area -->
+    <div class="col-lg-8">
+        <div class="row mb-4">
+            <div class="col-12 text-start">
+                <h2 class="fw-light mb-1">Autonomous Supervision Hub</h2>
+                <p class="text-muted small">xG-AI Cognitive Controller | Real-time Network Intelligence</p>
             </div>
-            <div class="card-body">
-                {% for field, message in context_topology_form.errors.items() %}
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <i class="bi bi-exclamation-triangle-fill me-2"></i>
-                    <b>{{ field }}</b>: {{ message }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-header border-0 pb-0">
+                        <h6 class="text-uppercase small fw-bold text-muted mb-0">Working Context</h6>
+                    </div>
+                    <div class="card-body">
+                        <form id="select_context" method="POST" enctype="multipart/form-data">
+                            {{ context_topology_form.hidden_tag() }}
+                            <div class="mb-3">
+                                {{ context_topology_form.context_topology(class="form-select") }}
+                            </div>
+                            <div class="d-flex justify-content-end">
+                                {{ context_topology_form.submit(class='btn btn-sm btn-primary') }}
+                            </div>
+                        </form>
+                    </div>
                 </div>
-                {% endfor %}
+            </div>
 
-                <form id="select_context" method="POST" enctype="multipart/form-data">
-                    {{ context_topology_form.hidden_tag() }}
-                    <div class="mb-4">
-                        {{ context_topology_form.context_topology.label(class="form-label small text-uppercase text-muted fw-bold") }}
-                        {% if context_topology_form.context_topology.errors %}
-                        {{ context_topology_form.context_topology(class="form-select form-select-lg is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in context_topology_form.context_topology.errors %}
-                            <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                        {% else %}
-                        {{ context_topology_form.context_topology(class="form-select form-select-lg") }}
-                        {% endif %}
+            <div class="col-lg-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-header border-0 pb-0">
+                        <h6 class="text-uppercase small fw-bold text-muted mb-0">Import Descriptors</h6>
                     </div>
-                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                        {{ context_topology_form.submit(class='btn btn-primary px-4') }}
+                    <div class="card-body">
+                        <form id="upload_descriptors" method="POST" enctype="multipart/form-data">
+                            {{ descriptor_form.hidden_tag() }}
+                            <div class="mb-3">
+                                {{ descriptor_form.descriptors(class="form-control form-control-sm") }}
+                            </div>
+                            <div class="d-flex justify-content-end">
+                                {{ descriptor_form.submit(class='btn btn-sm btn-primary') }}
+                            </div>
+                        </form>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="col-lg-6 mb-4">
-        <div class="card h-100 border-0 shadow-sm">
-            <div class="card-header bg-white py-3 border-0">
-                <h5 class="card-title mb-0 d-flex align-items-center">
-                    <i class="bi bi-cloud-upload me-2 text-primary"></i>
-                    Import Descriptors
-                </h5>
-            </div>
-            <div class="card-body">
-                <form id="upload_descriptors" method="POST" enctype="multipart/form-data">
-                    {{ descriptor_form.hidden_tag() }}
-                    <div class="mb-4">
-                        {{ descriptor_form.descriptors.label(class="form-label small text-uppercase text-muted fw-bold") }}
-                        {% if descriptor_form.descriptors.errors %}
-                        {{ descriptor_form.descriptors(class="form-control form-control-lg is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in descriptor_form.descriptors.errors %}
-                            <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                        {% else %}
-                        {{ descriptor_form.descriptors(class="form-control form-control-lg") }}
-                        {% endif %}
-                        <div class="form-text mt-2">Upload JSON files containing network topology and device definitions.</div>
-                    </div>
-                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                        {{ descriptor_form.submit(class='btn btn-primary px-4') }}
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-12">
-        <div class="card border-0 shadow-sm">
-            <div class="card-header bg-white py-3 border-0 d-flex justify-content-between align-items-center">
-                <h5 class="card-title mb-0 d-flex align-items-center">
-                    <i class="bi bi-diagram-3 me-2 text-primary"></i>
-                    Network Topology
-                </h5>
-                <button class="btn btn-sm btn-outline-secondary" onclick="location.reload()">
-                    <i class="bi bi-arrow-clockwise me-1"></i> Refresh
-                </button>
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <div class="d-flex align-items-center">
+                    <i class="bi bi-diagram-3 me-2"></i>
+                    <span>Primary Topology View</span>
+                </div>
+                <div class="d-flex align-items-center">
+                    <button class="btn btn-sm btn-link text-decoration-none btn-expand p-0 me-3" id="expand-topology">
+                        <i class="bi bi-fullscreen me-1"></i> Expand
+                    </button>
+                    <button class="btn btn-sm btn-link text-white text-decoration-none btn-close-expand p-0 me-3" id="collapse-topology">
+                        <i class="bi bi-fullscreen-exit me-1"></i> Exit Full Screen
+                    </button>
+                    <button class="btn btn-sm btn-link text-decoration-none p-0" onclick="location.reload()">
+                        <i class="bi bi-arrow-clockwise me-1"></i> Refresh
+                    </button>
+                </div>
             </div>
             <div class="card-body p-0">
-                <div id="topology" style="min-height: 600px; background: #f8f9fa; border-radius: 0 0 8px 8px;"></div>
+                <div id="topology-canvas" style="min-height: 500px; width: 100%; background-color: var(--bg-base);"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- AIOps Sidebar -->
+    <div class="col-lg-4">
+        <div class="card h-100">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h6 class="m-0 text-uppercase small fw-bold"><i class="bi bi-terminal-fill me-2"></i>Autonomous Ops Log</h6>
+                <span class="badge bg-success-soft text-success small">LIVE</span>
+            </div>
+            <div class="card-body p-0 bg-dark overflow-auto" id="aiops-log-container" style="height: 700px; font-family: 'Roboto Mono', monospace; font-size: 0.8rem; background-color: #000 !important;">
+                <div class="p-3">
+                    <div class="mb-2">
+                        <span class="text-secondary">[2025-03-20 23:42:15]</span> 
+                        <span style="color: var(--text-secondary)">INFO:</span> 
+                        <span class="text-light">Scanning L3 topology for SLA drift...</span>
+                    </div>
+                    <div class="mb-2">
+                        <span class="text-secondary">[2025-03-20 23:43:02]</span> 
+                        <span style="color: #ffca28">WARN:</span> 
+                        <span class="text-light">Congestion detected on Link <span class="mono-id" style="background:#222">opt-001</span>. Analyzing reroute.</span>
+                    </div>
+                    <div class="mb-2">
+                        <span class="text-secondary">[2025-03-20 23:43:45]</span> 
+                        <span style="color: var(--gcp-blue)">ACTION:</span> 
+                        <span class="text-light">Optical path re-provisioned: ROADM-East -> ROADM-South -> ROADM-West.</span>
+                    </div>
+                    <div class="mb-2">
+                        <span class="text-secondary">[2025-03-20 23:44:10]</span> 
+                        <span style="color: var(--gcp-blue)">ACTION:</span> 
+                        <span class="text-light">DDoS Mitigation active on Router-A. Scrubbing traffic at edge...</span>
+                    </div>
+                    <div class="mb-2">
+                        <span class="text-secondary">[2025-03-20 23:45:01]</span> 
+                        <span style="color: var(--success-green)">SUCCESS:</span> 
+                        <span class="text-light">QKD Key Refresh completed for Slice-Gold-01.</span>
+                    </div>
+                    <div class="log-cursor">_</div>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
-<script src="https://d3js.org/d3.v4.min.js"></script>
-<script src="{{ url_for('js.topology_js') }}"></script>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="{{ url_for('static', filename='js/topology.js') }}"></script>
+<script>
+    // Integration with common topology logic
+    document.addEventListener('DOMContentLoaded', () => {
+        // Mock data matching the structure needed by initializeTopology
+        const dashboardData = {
+            nodes: [
+                { id: 'router-1', layer: 'ip', label: 'Router-A' },
+                { id: 'router-2', layer: 'ip', label: 'Router-B' },
+                { id: 'roadm-1', layer: 'optical', label: 'ROADM-East' }
+            ],
+            links: [
+                { source: 'router-1', target: 'router-2' },
+                { source: 'router-2', target: 'roadm-1' }
+            ]
+        };
+        
+        if (typeof initializeTopology === 'function') {
+            initializeTopology(dashboardData);
+        }
+
+        // Logic for "live" log feed effect
+        const logContainer = document.getElementById('aiops-log-container');
+        if (logContainer) {
+            logContainer.scrollTop = logContainer.scrollHeight;
+        }
+
+        // Topology Expansion Logic
+        const topologyCard = document.querySelector('#topology-canvas').closest('.card');
+        const expandBtn = document.getElementById('expand-topology');
+        const collapseBtn = document.getElementById('collapse-topology');
+
+        function toggleExpand(isExpanded) {
+            if (isExpanded) {
+                topologyCard.classList.add('topology-expanded');
+                document.body.style.overflow = 'hidden';
+            } else {
+                topologyCard.classList.remove('topology-expanded');
+                document.body.style.overflow = '';
+            }
+            // Trigger re-initialization for new dimensions
+            if (typeof initializeTopology === 'function') {
+                initializeTopology(dashboardData);
+            }
+        }
+
+        if (expandBtn) expandBtn.addEventListener('click', () => toggleExpand(true));
+        if (collapseBtn) collapseBtn.addEventListener('click', () => toggleExpand(false));
+    });
+</script>
+
+<style>
+    .bg-success-soft {
+        background-color: rgba(129, 201, 149, 0.15);
+    }
+    .log-cursor {
+        display: inline-block;
+        width: 8px;
+        height: 15px;
+        background-color: var(--text-secondary);
+        animation: blink 1s step-end infinite;
+        vertical-align: middle;
+    }
+    @keyframes blink {
+        from, to { opacity: 1; }
+        50% { opacity: 0; }
+    }
+</style>
 {% endblock %}

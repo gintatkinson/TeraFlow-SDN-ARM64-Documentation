@@ -13,6 +13,6 @@
 # limitations under the License.
 
 HOST = '0.0.0.0'  # accepts connections coming from any address
-DEBUG = False
+DEBUG = True
 SECRET_KEY = '>s&}24@{]]#k3&^5$f3#?6?h3{W@[}/7z}2pa]>{3&5%RP<)[('
 MAX_CONTENT_LENGTH = 1024*1024
