@@ -1,72 +1,108 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="row">
+<div class="row mb-4">
     <div class="col-12">
-        <h3 class="mb-4">Welcome to Cognitive Controller</h3>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item active" aria-current="page">Home</li>
+            </ol>
+        </nav>
+        <h2 class="fw-light">Dashboard</h2>
+        <p class="text-muted">Welcome to the xG-AI Cognitive Controller. Manage your contexts, topologies, and descriptors below.</p>
     </div>
 </div>
 
 <div class="row">
-    <div class="col-lg-6">
-        <div class="card mb-4">
-            <h5 class="card-title">Working Context</h5>
-            {% for field, message in context_topology_form.errors.items() %}
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <b>{{ field }}</b>: {{ message }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    <div class="col-lg-6 mb-4">
+        <div class="card h-100 border-0 shadow-sm">
+            <div class="card-header bg-white py-3 border-0">
+                <h5 class="card-title mb-0 d-flex align-items-center">
+                    <i class="bi bi-folder2-open me-2 text-primary"></i>
+                    Working Context
+                </h5>
             </div>
-            {% endfor %}
-
-            <form id="select_context" method="POST" enctype="multipart/form-data">
-                {{ context_topology_form.hidden_tag() }}
-                <div class="mb-3">
-                    {{ context_topology_form.context_topology.label(class="form-label") }}
-                    {% if context_topology_form.context_topology.errors %}
-                    {{ context_topology_form.context_topology(class="form-select is-invalid") }}
-                    <div class="invalid-feedback">
-                        {% for error in context_topology_form.context_topology.errors %}
-                        <span>{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                    {% else %}
-                    {{ context_topology_form.context_topology(class="form-select") }}
-                    {% endif %}
+            <div class="card-body">
+                {% for field, message in context_topology_form.errors.items() %}
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                    <b>{{ field }}</b>: {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
-                {{ context_topology_form.submit(class='btn btn-primary') }}
-            </form>
+                {% endfor %}
+
+                <form id="select_context" method="POST" enctype="multipart/form-data">
+                    {{ context_topology_form.hidden_tag() }}
+                    <div class="mb-4">
+                        {{ context_topology_form.context_topology.label(class="form-label small text-uppercase text-muted fw-bold") }}
+                        {% if context_topology_form.context_topology.errors %}
+                        {{ context_topology_form.context_topology(class="form-select form-select-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in context_topology_form.context_topology.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        {{ context_topology_form.context_topology(class="form-select form-select-lg") }}
+                        {% endif %}
+                    </div>
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        {{ context_topology_form.submit(class='btn btn-primary px-4') }}
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 
-    <div class="col-lg-6">
-        <div class="card mb-4">
-            <h5 class="card-title">Import Descriptors</h5>
-            <form id="upload_descriptors" method="POST" enctype="multipart/form-data">
-                {{ descriptor_form.hidden_tag() }}
-                <div class="mb-3">
-                    {{ descriptor_form.descriptors.label(class="form-label") }}
-                    {% if descriptor_form.descriptors.errors %}
-                    {{ descriptor_form.descriptors(class="form-control is-invalid") }}
-                    <div class="invalid-feedback">
-                        {% for error in descriptor_form.descriptors.errors %}
-                        <span>{{ error }}</span>
-                        {% endfor %}
+    <div class="col-lg-6 mb-4">
+        <div class="card h-100 border-0 shadow-sm">
+            <div class="card-header bg-white py-3 border-0">
+                <h5 class="card-title mb-0 d-flex align-items-center">
+                    <i class="bi bi-cloud-upload me-2 text-primary"></i>
+                    Import Descriptors
+                </h5>
+            </div>
+            <div class="card-body">
+                <form id="upload_descriptors" method="POST" enctype="multipart/form-data">
+                    {{ descriptor_form.hidden_tag() }}
+                    <div class="mb-4">
+                        {{ descriptor_form.descriptors.label(class="form-label small text-uppercase text-muted fw-bold") }}
+                        {% if descriptor_form.descriptors.errors %}
+                        {{ descriptor_form.descriptors(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in descriptor_form.descriptors.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        {{ descriptor_form.descriptors(class="form-control form-control-lg") }}
+                        {% endif %}
+                        <div class="form-text mt-2">Upload JSON files containing network topology and device definitions.</div>
                     </div>
-                    {% else %}
-                    {{ descriptor_form.descriptors(class="form-control") }}
-                    {% endif %}
-                </div>
-                {{ descriptor_form.submit(class='btn btn-primary') }}
-            </form>
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        {{ descriptor_form.submit(class='btn btn-primary px-4') }}
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>
 
 <div class="row">
     <div class="col-12">
-        <div class="card">
-            <h5 class="card-title">Network Topology</h5>
-            <div id="topology" style="min-height: 500px; background: #fff;"></div>
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white py-3 border-0 d-flex justify-content-between align-items-center">
+                <h5 class="card-title mb-0 d-flex align-items-center">
+                    <i class="bi bi-diagram-3 me-2 text-primary"></i>
+                    Network Topology
+                </h5>
+                <button class="btn btn-sm btn-outline-secondary" onclick="location.reload()">
+                    <i class="bi bi-arrow-clockwise me-1"></i> Refresh
+                </button>
+            </div>
+            <div class="card-body p-0">
+                <div id="topology" style="min-height: 600px; background: #f8f9fa; border-radius: 0 0 8px 8px;"></div>
+            </div>
         </div>
     </div>
 </div>
