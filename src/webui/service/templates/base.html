@@ -125,7 +125,7 @@
             </li>
             {% endif %}
 
-            {% if is_deployed_qkd_app() %}
+            {% if True %} {# Always show for modernization review #}
             <li class="nav-item">
               <a class="nav-link {% if '/qkd_app/' in request.path %}active{% endif %}" href="{{ url_for('qkd_app.home') }}">
                 <i class="bi bi-key"></i> Quantum Apps

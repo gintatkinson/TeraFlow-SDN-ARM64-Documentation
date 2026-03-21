@@ -33,7 +33,7 @@
                     <tr>
                         <td>
                             <div class="fw-bold">{{ device.name }}</div>
-                            <div class="small text-muted" style="font-size: 0.75rem;">{{ device.device_id.device_uuid.uuid }}</div>
+                            <div class="mono-id" style="font-size: 0.75rem;">{{ device.device_id.device_uuid.uuid }}</div>
                         </td>
                         <td><span class="badge bg-light text-dark border">{{ device.device_type }}</span></td>
                         <td class="text-center">{{ device.device_endpoints | length }}</td>

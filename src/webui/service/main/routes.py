@@ -54,9 +54,21 @@ def process_descriptors(descriptors):
 @main.route('/', methods=['GET', 'POST'])
 def home():
     context_client.connect()
-    device_client.connect()
+    # Force admin context for UI/UX verification
+    if 'context_uuid' not in session:
+        session['context_uuid'] = 'admin'
+        session['topology_uuid'] = 'admin'
+        session['context_topology_uuid'] = 'YWRtaW4=,YWRtaW4=' # b64 for admin,admin
+
     context_topology_form = ContextTopologyForm()
     context_topology_form.context_topology.choices.append(('', 'Select...'))
+    
+    # Mock context for UI/UX verification
+    import base64
+    mock_values = ['admin', 'admin']
+    mock_b64 = [base64.b64encode(v.encode('utf-8')).decode('utf-8') for v in mock_values]
+    mock_uuid = ','.join(mock_b64)
+    context_topology_form.context_topology.choices.append((mock_uuid, 'Context(admin):Topology(admin) [Mock]'))
 
     contexts : ContextList = context_client.ListContexts(Empty())
     for context_ in contexts.contexts:

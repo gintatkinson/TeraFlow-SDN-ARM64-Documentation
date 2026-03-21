@@ -17,96 +17,87 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>Topology</h1>
-
-    <div class="row">
-       
-        <div class="col">
-            {{ speakers | length }} speakers found in context <i>{{ session['context_uuid'] }}</i>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1 class="m-0">Multi-Layer Network Topology</h1>
+        <div class="d-flex align-items-center">
+            <a href="{{ url_for('topology.editSpeakers') }}" class="btn btn-sm btn-outline-primary me-2">
+                <i class="bi bi-pencil-square me-1"></i>
+                Manage BGPLS Speakers
+            </a>
+            <a href="{{ url_for('topology.addSpeaker') }}" class="btn btn-sm btn-primary">
+                <i class="bi bi-plus me-1"></i>
+                Add Speaker
+            </a>
         </div>
     </div>
-        <div class="row">
-        <div class="col">
-            <a href="{{ url_for('topology.addSpeaker') }}" class="btn btn-primary" style="margin-bottom: 10px;">
-                <i class="bi bi-plus"></i>
-                Add BGPLS Speaker
-            </a>
-        </div>
 
-        <div class="col">
-            <a href="{{ url_for('topology.editSpeakers') }}" class="btn btn-primary" style="margin-bottom: 10px;">
-                <i class="bi bi-pencil-square"></i>
-                Edit BGPLS Speakers
-            </a>
-        </div>
-    </div>  
+    <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center">
+                <i class="bi bi-diagram-3 me-2"></i>
+                <span>Topology Graph</span>
+            </div>
+            <div id="layer-filters" class="btn-group btn-group-sm" role="group" aria-label="Layer Filters">
+                <input type="checkbox" class="btn-check" id="layer-3gpp" autocomplete="off" checked>
+                <label class="btn btn-outline-secondary" for="layer-3gpp"><i class="bi bi-reception-4 me-1"></i>3GPP/Slice</label>
 
-    <table class="table table-striped table-hover">
-        <thead>
-          <tr>
-            <th scope="col">Node name</th>
-            <th scope="col">Local IGP Id</th>
-            <th scope="col">Remote IGP Id</th>
-            <th scope="col">Learnt from</th>
-            <th scope="col"></th>
-          </tr>
-        </thead>
-        <tbody>
-            {% if disdev %}
-                {% for device in disdev %}
-                <tr>
-                    <td>{{ device.nodeName }}</td>
-                    <td>{{ device.igpID }}</td>
-                    <td></td>
-                    <td>{{ device.learntFrom }}</td>
-                    <td>
-                        <div class="col">
-                            <a href='{{ url_for("topology.add",device_name=device.nodeName)}}'>
-                                <i class="bi bi-plus"></i>
-                                Add Device
-                            </a>
-                        </div>
-                            
-                    
-                    </td>
-                </tr>
-                {% endfor %}
-            {% else %}
-                <tr>
-                    <td colspan="3">No devices found</td>
-                </tr>
-            {% endif %}
-        </tbody>
-        <tbody>
-            {% if dislink %}
-                {% for link in dislink %}
-                <tr>
-                    <td></td>
-                    <td>{{ link.local.nodeName }}</td>
-                    <td>{{ link.remote.nodeName }}</td>
-                    <td>{{ link.learntFrom }}</td>
-                    <td>
-                        <div class="col">
-                            <a href=''>
-                                <i class="bi bi-plus"></i>
-                                Add Link
-                            </a>
-                        </div>
-                            
-                    
-                    </td>
-                </tr>
-                {% endfor %}
-            {% else %}
-                <tr>
-                    <td colspan="3">No devices found</td>
-                </tr>
-            {% endif %}
-        </tbody>
-    </table>
+                <input type="checkbox" class="btn-check" id="layer-ip" autocomplete="off" checked>
+                <label class="btn btn-outline-secondary" for="layer-ip"><i class="bi bi-hdd-network me-1"></i>L2/L3 IP</label>
+
+                <input type="checkbox" class="btn-check" id="layer-optical" autocomplete="off" checked>
+                <label class="btn btn-outline-secondary" for="layer-optical"><i class="bi bi-bezier2 me-1"></i>OpenROADM/Optical</label>
+
+                <input type="checkbox" class="btn-check" id="layer-qkd" autocomplete="off" checked>
+                <label class="btn btn-outline-secondary" for="layer-qkd"><i class="bi bi-key-fill me-1"></i>QKD/Quantum</label>
+            </div>
+        </div>
+        <div class="card-body p-0">
+            <div id="topology-canvas" style="min-height: 600px; width: 100%; background-color: var(--bg-base);"></div>
+        </div>
+    </div>
         
-    <script src="https://d3js.org/d3.v4.min.js"></script>
-    <div id="topology"></div>
-    <script src="{{ url_for('js.topology_js') }}"></script>
+    <script>
+        // Mock data to pass to the topology visualization
+        const topologyData = {
+            nodes: [
+                // 3GPP/Slice Layer
+                { id: 'slice-ran-1', layer: '3gpp', label: 'gNB-CU-1' },
+                { id: 'slice-core-1', layer: '3gpp', label: 'UPF-1' },
 
+                // IP Layer
+                { id: 'ip-router-1', layer: 'ip', label: 'Router-A' },
+                { id: 'ip-router-2', layer: 'ip', label: 'Router-B' },
+                { id: 'ip-switch-1', layer: 'ip', label: 'Switch-X' },
+
+                // Optical Layer
+                { id: 'roadm-1', layer: 'optical', label: 'ROADM-East' },
+                { id: 'roadm-2', layer: 'optical', label: 'ROADM-West' },
+                { id: 'amp-1', layer: 'optical', label: 'Amplifier' },
+
+                // QKD Layer
+                { id: 'qkd-node-1', layer: 'qkd', label: 'QKD-Node-Alice' },
+                { id: 'qkd-node-2', layer: 'qkd', label: 'QKD-Node-Bob' },
+            ],
+            links: [
+                // Inter-layer links
+                { source: 'slice-ran-1', target: 'ip-router-1' },
+                { source: 'slice-core-1', target: 'ip-router-1' },
+                { source: 'ip-router-1', target: 'ip-router-2' },
+                { source: 'ip-router-2', target: 'roadm-1' },
+                { source: 'roadm-1', target: 'roadm-2', type: 'classical' },
+                { source: 'roadm-2', target: 'ip-switch-1' },
+                
+                // QKD Link
+                { source: 'qkd-node-1', target: 'qkd-node-2', type: 'quantum' },
+                { source: 'qkd-node-1', target: 'roadm-1' }, // QKD control plane
+                { source: 'qkd-node-2', target: 'roadm-2' }  // QKD control plane
+            ]
+        };
+        
+        // Initialize the topology visualization
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeTopology(topologyData);
+        });
+
+    </script>
 {% endblock %}

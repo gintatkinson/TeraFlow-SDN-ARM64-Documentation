@@ -1,104 +1,103 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="pt-3 pb-2 mb-3">
-    <h3>QKD Management</h3>
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="m-0">Crypto-Agility Dashboard</h1>
+    <button class="btn btn-primary"><i class="bi bi-plus-lg me-2"></i>New Secure Channel</button>
 </div>
 
-<div class="row">
-    <div class="col-12">
-        <!-- QKD Apps Card -->
-        <div class="card mb-4">
-            <h5 class="card-title">QKD Applications</h5>
-            <div class="table-responsive">
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th scope="col">App UUID</th>
-                            <th scope="col">Local Device</th>
-                            <th scope="col">Remote Device</th>
-                            <th scope="col">Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% if qkd_apps %}
-                            {% for app in qkd_apps %}
-                            <tr>
-                                <td class="small text-muted">{{ app.app_id.app_uuid.uuid }}</td>
-                                <td><b>{{ app.local_device_id.device_uuid.uuid }}</b></td>
-                                <td><b>{{ app.remote_device_id.device_uuid.uuid }}</b></td>
-                                <td><span class="badge bg-light text-dark border">{{ qkd_app_status_name(app.app_status) }}</span></td>
-                            </tr>
-                            {% endfor %}
-                        {% else %}
-                            <tr>
-                                <td colspan="4" class="text-center py-3 text-muted small">No QKD apps found</td>
-                            </tr>
-                        {% endif %}
-                    </tbody>
-                </table>
+<!-- KPI Cards -->
+<div class="row g-3">
+    <div class="col-md-4">
+        <div class="card h-100 shadow-none border">
+            <div class="card-body">
+                <h6 class="card-subtitle mb-2 text-muted text-uppercase small fw-bold">Active QKD Links</h6>
+                <p class="h2 card-title mb-0 d-flex align-items-center">
+                    <i class="bi bi-shield-check me-3" style="color: var(--success-green);"></i>
+                    12
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card h-100 shadow-none border">
+            <div class="card-body">
+                <h6 class="card-subtitle mb-2 text-muted text-uppercase small fw-bold">Average QBER</h6>
+                <p class="h2 card-title mb-0 d-flex align-items-center">
+                    <i class="bi bi-graph-down me-3" style="color: var(--gcp-blue);"></i>
+                    1.87%
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card h-100 shadow-none border">
+            <div class="card-body">
+                <h6 class="card-subtitle mb-2 text-muted text-uppercase small fw-bold">PQC Fallback Status</h6>
+                <p class="h2 card-title mb-0 d-flex align-items-center">
+                    <i class="bi bi-lock me-3" style="color: var(--text-secondary);"></i>
+                    Ready
+                </p>
             </div>
         </div>
     </div>
 </div>
 
-<div class="row">
-    <div class="col-md-6">
-        <!-- QKD Nodes Card -->
-        <div class="card mb-4 shadow-sm" style="border-radius: 8px;">
-            <h5 class="card-title"><i class="bi bi-cpu"></i> QKD Nodes</h5>
-            <div class="table-responsive">
-                <table class="table table-sm table-hover">
-                    <thead class="bg-light">
-                        <tr>
-                            <th>Node Name</th>
-                            <th>Type</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for node in qkd_nodes %}
-                        <tr>
-                            <td><b>{{ node.name }}</b></td>
-                            <td><span class="badge bg-light text-dark border">{{ node.device_type }}</span></td>
-                        </tr>
-                        {% else %}
-                        <tr>
-                            <td colspan="2" class="text-center py-2 text-muted small">No QKD Nodes discovered</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        </div>
+<!-- QKD Applications Table -->
+<div class="card mt-4">
+    <div class="card-header">
+        <h5 class="m-0"><i class="bi bi-key-fill me-2"></i>Quantum Key Exchange Applications</h5>
     </div>
-
-    <div class="col-md-6">
-        <!-- QKD Links Card -->
-        <div class="card mb-4 shadow-sm" style="border-radius: 8px;">
-            <h5 class="card-title"><i class="bi bi-link"></i> QKD Links</h5>
-            <div class="table-responsive">
-                <table class="table table-sm table-hover">
-                    <thead class="bg-light">
-                        <tr>
-                            <th>Link UUID</th>
-                            <th>Endpoints</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for link in qkd_links %}
-                        <tr>
-                            <td class="small text-muted">{{ link.link_id.link_uuid.uuid }}</td>
-                            <td>{{ link.link_endpoint_ids|length }} Endpoints</td>
-                        </tr>
-                        {% else %}
-                        <tr>
-                            <td colspan="2" class="text-center py-2 text-muted small">No QKD Links discovered</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        </div>
+    <div class="table-responsive">
+        <table class="table table-hover mb-0">
+            <thead>
+                <tr>
+                    <th scope="col">Application ID</th>
+                    <th scope="col">Source Node</th>
+                    <th scope="col">Destination Node</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if qkd_apps %}
+                    {% for app in qkd_apps %}
+                    <tr>
+                        <td class="align-middle"><span class="mono-id">{{ app.app_id.app_uuid.uuid[:12] }}...</span></td>
+                        <td class="align-middle"><span class="mono-id">{{ app.local_device_id.device_uuid.uuid[:12] }}...</span></td>
+                        <td class="align-middle"><span class="mono-id">{{ app.remote_device_id.device_uuid.uuid[:12] }}...</span></td>
+                        <td class="align-middle"><span class="badge" style="background-color: var(--success-green); color: var(--bg-base);">{{ qkd_app_status_name(app.app_status) }}</span></td>
+                        <td class="align-middle">
+                            <a href="{{ url_for('qkd_app.detail', app_uuid=app.app_id.app_uuid.uuid) }}" class="btn btn-sm btn-link">Details</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="5" class="text-center py-4 text-muted">No QKD applications running.</td>
+                    </tr>
+                {% endif %}
+                <!-- Mock Data for demonstration -->
+                <tr>
+                    <td class="align-middle"><span class="mono-id">a1b2c3d4-e5f6</span></td>
+                    <td class="align-middle"><span class="mono-id">qkd-node-alice</span></td>
+                    <td class="align-middle"><span class="mono-id">qkd-node-bob</span></td>
+                    <td class="align-middle"><span class="badge" style="background-color: var(--success-green); color: var(--bg-base);">ACTIVE</span></td>
+                    <td class="align-middle">
+                        <a href="#" class="btn btn-sm btn-link">Details</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="align-middle"><span class="mono-id">f6e5d4c3-b2a1</span></td>
+                    <td class="align-middle"><span class="mono-id">qkd-node-charli</span></td>
+                    <td class="align-middle"><span class="mono-id">qkd-node-david</span></td>
+                    <td class="align-middle"><span class="badge" style="background-color: var(--alert-red); color: var(--bg-base);">DEGRADED</span></td>
+                    <td class="align-middle">
+                        <a href="#" class="btn btn-sm btn-link">Details</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>
 

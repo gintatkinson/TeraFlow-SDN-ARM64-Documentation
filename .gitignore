@@ -198,3 +198,7 @@ libyang/
 *.tgz
 *.tar.gz
 src/device/service/drivers/openconfig/templates/VPN/openconfig_network_instance.py
+
+# macOS metadata
+._*
+.DS_Store
